@@ -1,0 +1,228 @@
+<?php
+if ($this->thisperson->getID() != null)
+    BaseView::DisplayTitle('Edit User');
+elseif ($this->thisperson->getUsername() != null)
+    BaseView::DisplayTitle('Submit Your Information for Entry');
+else
+    BaseView::DisplayTitle('Add New User');
+?>
+<form id="addeditPerson" action="#" method="post" data-validate="parsley">
+    <input type="hidden" id="reload" name="reload" value="">
+    <input type="hidden" name="person[id]" value="<?php echo $this->thisperson->getID(); ?>">
+    <?php
+    $submitarray['save'] = 'SAVE';
+    Baseview::DisplaySubmit('submitright', $submitarray);
+
+    $first_name = new FieldInputText();
+    $first_name->setLabel("First Name");
+    $first_name->setFieldClass("field");
+    $first_name->setMandatory(true);
+    $first_name->setValidation('data-trigger="change" data-required="true" data-type="alphanum"');
+    $first_name->setValue($this->thisperson->getFirstName());
+    $first_name->setSize(20);
+    $first_name->setLength(20);
+    $first_name->setId("first_name");
+    $first_name->setName("person[first_name]");
+    $first_name->ShowField();
+
+    $middle = new FieldInputText();
+    $middle->setLabel("Middle");
+    $middle->setFieldClass("field");
+    $middle->setValidation('ddata-trigger="change" data-type="alphanum"');
+    $middle->setValue($this->thisperson->getMiddle());
+    $middle->setSize(2);
+    $middle->setLength(1);
+    $middle->setId("middle");
+    $middle->setName("person[middle]");
+    $middle->ShowField();
+
+    $last_name = new FieldInputText();
+    $last_name->setLabel("Last Name");
+    $last_name->setFieldClass("field");
+    $last_name->setMandatory(true);
+    $last_name->setValidation('data-trigger="change" data-required="true" data-type="alphanum"');
+    $last_name->setValue($this->thisperson->getLastName());
+    $last_name->setSize(20);
+    $last_name->setLength(20);
+    $last_name->setId("last_name");
+    $last_name->setName("person[last_name]");
+    $last_name->ShowField();
+
+    $email = new FieldInputText();
+    $email->setLabel("Email");
+    $email->setFieldClass("field");
+    $email->setMandatory(true);
+    $email->setValidation('data-trigger="change" data-required="true" data-type="email"');
+    $email->setValue($this->thisperson->getEmail());
+    $email->setSize(30);
+    $email->setLength(50);
+    $email->setOutOther('<br>(must be mail.mil account)<br><br>');
+    $email->setId("email");
+    $email->setName("person[email]");
+    $email->ShowField();
+
+    $username = new FieldInputText();
+    $username->setLabel("Username");
+    $username->setFieldClass("field");
+    $username->setValue($this->thisperson->getUsername());
+    $username->setName("person[username]");
+    if ($this->thisperson->getID() == null && $this->thisperson->getUsername() != null) {
+        $username->setReadonly(true);
+    } else {
+        $username->setMandatory(true);
+        $username->setValidation('data-trigger="change" data-required="true"');
+        $username->setSize(30);
+        $username->setLength(50);
+        $username->setId("username");
+    }
+    $username->ShowField();
+
+    $badge_number = new FieldInputText();
+    $badge_number->setLabel("Badge Number");
+    $badge_number->setFieldClass("field");
+    $badge_number->setMandatory(true);
+    $badge_number->setValidation('data-trigger="change" data-required="true"');
+    $badge_number->setValue($this->thisperson->getBadgeNumber());
+    $badge_number->setSize(15);
+    $badge_number->setLength(15);
+    $badge_number->setId("badge_number");
+    $badge_number->setName("person[badge_number]");
+    $badge_number->ShowField();
+
+    $company = new FieldSelect();
+    $company->setLabel("Company");
+    $company->setFieldClass("field");
+    $company->setMandatory(true);
+    $company->setId("company");
+    $company->setValue($this->thisperson->getCompanyFK()->getID());
+    $company->setName("person[company_fk]");
+    $company->setValidation('data-trigger="change" data-required="true"');
+    $company->setJcomboPath("apps/Person/model/getCompanies.php");
+    $company->setOutOther('</td><td style="vertical-align:top"><input type="button" value="Add Company" onClick="CompanyUpdate();">');
+    $company->ShowField();
+
+    $organization = new FieldSelect();
+    $organization->setLabel("Organization");
+    $organization->setFieldClass("field");
+    $organization->setMandatory(true);
+    $organization->setId("organization");
+    $organization->setValue($this->thisperson->getOrganizationFK()->getID());
+    $organization->setName("person[organization_fk]");
+    $organization->setValidation('data-trigger="change" data-required="true"');
+    $organization->setJcomboPath("apps/Person/model/getOrganizations.php");
+    $organization->ShowField();
+
+    $supervisor = new FieldSelect();
+    $supervisor->setLabel("Administrative Lead");
+    $supervisor->setFieldClass("field");
+    $supervisor->setId("supervisor");
+    $supervisor->setValue($this->thisperson->getSupervisorFK()->getID());
+    $supervisor->setName("person[supervisor_fk]");
+    $supervisor->setJcomboPath("apps/Person/model/getSupervisors.php");
+    $supervisor->ShowField();
+
+    $domain = new FieldSelect();
+    $domain->setLabel("Domain");
+    $domain->setFieldClass("field");
+    $domain->setMandatory(true);
+    $domain->setId("domain");
+    $domain->setValue($this->thisperson->getDomainFK()->getID());
+    $domain->setName("person[domain_fk]");
+    $domain->setValidation('data-trigger="change" data-required="true"');
+    $domain->setJcomboPath("lib/getDomains.php");
+    $domain->ShowField();
+
+    $desk_phone = new FieldInputText();
+    $desk_phone->setLabel("Desk Phone");
+    $desk_phone->setFieldClass("field");
+    $desk_phone->setValidation('data-trigger="change" data-type="phone"');
+    $desk_phone->setValue($this->thisperson->getDeskPhone());
+    $desk_phone->setSize(14);
+    $desk_phone->setLength(14);
+    $desk_phone->setId("desk_phone");
+    $desk_phone->setName("person[desk_phone]");
+    $desk_phone->ShowField();
+
+    $mobile_phone = new FieldInputText();
+    $mobile_phone->setLabel("Mobile Phone");
+    $mobile_phone->setFieldClass("field");
+    $mobile_phone->setValidation('data-trigger="change" data-type="phone"');
+    $mobile_phone->setValue($this->thisperson->getMobilePhone());
+    $mobile_phone->setSize(14);
+    $mobile_phone->setLength(14);
+    $mobile_phone->setId("mobile_phone");
+    $mobile_phone->setName("person[mobile_phone]");
+    $mobile_phone->ShowField();
+
+    if (isset($this->current_person)) {
+        if ($this->current_person->IsAdministrator() == true) {
+            $cost_center = new FieldSelect();
+            $cost_center->setLabel("Cost Center");
+            $cost_center->setFieldClass("field");
+            $cost_center->setId("cost_center");
+            $cost_center->setValue($this->thisperson->getCostCenterFK()->getID());
+            $cost_center->setName("person[cost_center_fk]");
+            $cost_center->setJcomboPath("apps/Project/model/getAtaapsCCs.php");
+            $cost_center->ShowField();
+
+            $administrator = new FieldCheckbox();
+            $administrator->setLabel("Administrator");
+            $administrator->setFieldClass("field");
+            if ($this->thisperson->isAdministrator())
+                $administrator->setChecked(true);
+            $administrator->setValue(true);
+            $administrator->setName("administrator");
+            $administrator->ShowField();
+
+            $supervisor = new FieldCheckbox();
+            $supervisor->setLabel("Administrative Team Lead");
+            $supervisor->setFieldClass("field");
+            if ($this->thisperson->isSupervisor())
+                $supervisor->setChecked(true);
+            $supervisor->setValue(true);
+            $supervisor->setName("supervisor");
+            $supervisor->ShowField();
+
+            $active = new FieldCheckbox();
+            $active->setLabel("Active");
+            $active->setFieldClass("field");
+            if ($this->thisperson->getActive())
+                $active->setChecked(true);
+            $active->setValue(true);
+            $active->setName("active");
+            $active->ShowField();
+
+            $single_charger = new FieldCheckbox();
+            $single_charger->setLabel("Single WBS Charger?");
+            $single_charger->setFieldClass("field");
+            if ($this->thisperson->getSingleCharger())
+                $single_charger->setChecked(true);
+            $single_charger->setValue(true);
+            $single_charger->setName("single_charger");
+            $single_charger->ShowField();
+
+            $single_charge = new FieldSelect();
+            $single_charge->setLabel("Single Charge WBS");
+            $single_charge->setFieldClass("field");
+            $single_charge->setId("single_charge");
+            $single_charge->setValue($this->thisperson->getSingleChargeFK()->getID());
+            $single_charge->setName("person[single_charge_fk]");
+            $single_charge->setJcomboPath("apps/Project/model/getProjectAtaaps.php");
+            $single_charge->ShowField();
+        }
+    }
+    ?>
+</form>
+<script>
+    function CompanyUpdate() {
+        var w = window.open("index.php?action=addeditCompany&controller=Person&popup=true", "Add Company", "height=500,width=500,titlebar=no,scrollbars=no,location=no,toolbar=no,status=no,menubar=no,resizable=yes");
+        w.focus();
+        var monitor = setInterval(function() {
+            if (w.closed) {
+                document.getElementById("reload").value = "reload";
+                document.getElementById("addeditPerson").submit();
+            }
+        }, 500);
+    }
+</script>
+
