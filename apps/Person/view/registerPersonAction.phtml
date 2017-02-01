@@ -1,0 +1,34 @@
+<div class="container">
+    <form id="registerPerson" action="#" method="post" data-parsley-validate="" data-parsley-focus="none" >
+        <div class="header" align="center">
+            <br><br>
+            <img src="public/images/logoBlackText.png" alt="PocketEMR" style="width:300px" >
+            <h3>Sign Up</h3>
+            <p>Get started!</p>
+        </div>
+        <div class="sep"></div>
+        <div class="inputs">
+            <input type="text" name="register[first_name]" placeholder="First Name" data-parsley-trigger="change" data-parsley-required="" autofocus />
+            <input type="text" name="register[last_name]" placeholder="Last Name" data-parsley-trigger="change" data-parsley-required="" />
+            <input type="email" name="register[email]" placeholder="E-mail" data-parsley-trigger="change" data-parsley-required="" />
+            <input type="text" name="register[username]" placeholder="Username" data-parsley-trigger="change" data-parsley-required="" />
+            <input type="password" id="password" name="register[password]" placeholder="password" data-parsley-trigger="change" data-parsley-required="" />
+             <input type="password" placeholder="confirm password" data-parsley-trigger="change" data-parsley-required="" data-parsley-equalto="#password" />
+             <div class="checkboxy">
+                <input name="register[role_fk]" id="checky" value="1" type="radio" /><label class="terms">I am a physician</label>
+             
+                <input name="register[role_fk]" id="checky" value="2" type="radio" data-parsley-trigger="change" data-parsley-required="" /><label class="terms">I am a patient</label>
+            </div>
+            <p>Select a security question:</p>
+            <select id="security-question" name="register[security_question_fk]" style="margin-top: 0px;" data-parsley-trigger="submit" data-parsley-required=""></select>
+            <script> $(function() { $("#security-question").jCombo("/apps/Person/model/getPersonSecurityQuestions.php");});</script>
+            <input type="text" name="register[security_answer]" placeholder="Security Answer" data-parsley-trigger="change" data-parsley-required="" />
+            <button id="submit" type="submit" name="register-button">SIGN UP</button>
+        </div>
+        <br>
+        <a href="<?php echo Utils::createLink('Person','loginPerson'); ?>">Already have an account? Login Here!</a>
+    </form>
+</div>
+
+</body>
+

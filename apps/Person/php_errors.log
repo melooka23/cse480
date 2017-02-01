@@ -1,0 +1,75 @@
+[30-Jan-2017 01:13:37 UTC] PHP Fatal error:  Class 'personMapper' not found in /home/ubuntu/workspace/apps/Person/controller/loginregisterPersonController.php on line 3
+[30-Jan-2017 01:13:37 UTC] PHP Stack trace:
+[30-Jan-2017 01:13:37 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/controller/loginregisterPersonController.php:0
+[30-Jan-2017 19:27:46 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 26
+[30-Jan-2017 19:27:46 UTC] PHP Stack trace:
+[30-Jan-2017 19:27:46 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[30-Jan-2017 19:30:18 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 26
+[30-Jan-2017 19:30:18 UTC] PHP Stack trace:
+[30-Jan-2017 19:30:18 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[30-Jan-2017 21:39:19 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[30-Jan-2017 21:39:19 UTC] PHP Stack trace:
+[30-Jan-2017 21:39:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[30-Jan-2017 21:39:25 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[30-Jan-2017 21:39:25 UTC] PHP Stack trace:
+[30-Jan-2017 21:39:25 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[30-Jan-2017 21:41:28 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[30-Jan-2017 21:41:28 UTC] PHP Stack trace:
+[30-Jan-2017 21:41:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[30-Jan-2017 21:41:31 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[30-Jan-2017 21:41:31 UTC] PHP Stack trace:
+[30-Jan-2017 21:41:31 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[30-Jan-2017 21:41:37 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[30-Jan-2017 21:41:37 UTC] PHP Stack trace:
+[30-Jan-2017 21:41:37 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 19:31:20 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/registerPersonAction.phtml on line 24
+[31-Jan-2017 19:31:20 UTC] PHP Stack trace:
+[31-Jan-2017 19:31:20 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/registerPersonAction.phtml:0
+[31-Jan-2017 19:31:26 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/registerPersonAction.phtml on line 24
+[31-Jan-2017 19:31:26 UTC] PHP Stack trace:
+[31-Jan-2017 19:31:26 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/registerPersonAction.phtml:0
+[31-Jan-2017 19:32:03 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 19:32:03 UTC] PHP Stack trace:
+[31-Jan-2017 19:32:03 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 19:32:05 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 19:32:05 UTC] PHP Stack trace:
+[31-Jan-2017 19:32:05 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 19:32:10 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 19:32:10 UTC] PHP Stack trace:
+[31-Jan-2017 19:32:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 19:32:10 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 19:32:10 UTC] PHP Stack trace:
+[31-Jan-2017 19:32:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 19:32:11 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 19:32:11 UTC] PHP Stack trace:
+[31-Jan-2017 19:32:11 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 23:26:37 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/registerPersonAction.phtml on line 24
+[31-Jan-2017 23:26:37 UTC] PHP Stack trace:
+[31-Jan-2017 23:26:37 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/registerPersonAction.phtml:0
+[31-Jan-2017 23:26:41 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/registerPersonAction.phtml on line 24
+[31-Jan-2017 23:26:41 UTC] PHP Stack trace:
+[31-Jan-2017 23:26:41 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/registerPersonAction.phtml:0
+[31-Jan-2017 23:27:36 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 23:27:36 UTC] PHP Stack trace:
+[31-Jan-2017 23:27:36 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 23:32:24 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 23:32:24 UTC] PHP Stack trace:
+[31-Jan-2017 23:32:24 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 23:32:32 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 23:32:32 UTC] PHP Stack trace:
+[31-Jan-2017 23:32:32 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 23:33:02 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 23:33:02 UTC] PHP Stack trace:
+[31-Jan-2017 23:33:02 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 23:36:09 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 23:36:09 UTC] PHP Stack trace:
+[31-Jan-2017 23:36:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[31-Jan-2017 23:36:16 UTC] PHP Fatal error:  Class 'Utils' not found in /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml on line 25
+[31-Jan-2017 23:36:16 UTC] PHP Stack trace:
+[31-Jan-2017 23:36:16 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/loginPersonAction.phtml:0
+[01-Feb-2017 04:06:27 UTC] PHP Fatal error:  Class 'PersonSecurityQuestionMapper' not found in /home/ubuntu/workspace/apps/Person/model/getPersonSecurityQuestions.php on line 6
+[01-Feb-2017 04:06:27 UTC] PHP Stack trace:
+[01-Feb-2017 04:06:27 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/model/getPersonSecurityQuestions.php:0
+[01-Feb-2017 04:06:46 UTC] PHP Fatal error:  Call to a member function getID() on a non-object in /home/ubuntu/workspace/apps/Person/model/getPersonSecurityQuestions.php on line 9
+[01-Feb-2017 04:06:46 UTC] PHP Stack trace:
+[01-Feb-2017 04:06:46 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/model/getPersonSecurityQuestions.php:0

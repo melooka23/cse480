@@ -1,0 +1,30 @@
+<div class="container">
+<form id="loginPerson" action="#" method="post" data-parsley-validate="" data-parsley-focus="none" >
+  
+  <div class="header" align="center">
+        
+            <br><br>
+            <img src="public/images/logoBlackText.png" alt="PocketEMR" style="width:300px" >
+            <h3>Log In</h3>
+            
+            <p>Log in!</p>
+            
+        </div>
+        
+        <div class="sep"></div>
+        
+        <div class="inputs">
+        
+            <input type="text" name="login[username]" placeholder="Username" data-parsley-trigger="change" data-parsley-required="" autofocus />
+        
+            <input type="password" name="login[password]" placeholder="Password" data-parsley-trigger="change" data-parsley-required="" />
+            
+            <button id="submit" type="submit" name="login-button">LOG IN</button>
+        
+        </div>
+        
+  <br>
+      <a href="<?php echo Utils::createLink('Person','registerPerson'); ?>">Click here to register</a>
+      
+</form>
+</div> <!-- /container -->

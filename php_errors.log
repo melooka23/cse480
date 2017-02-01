@@ -1,0 +1,6 @@
+[31-Jan-2017 02:14:39 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
+[31-Jan-2017 02:14:39 UTC] PHP Stack trace:
+[31-Jan-2017 02:14:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/index.phtml:0
+[31-Jan-2017 03:52:48 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
+[31-Jan-2017 03:52:48 UTC] PHP Stack trace:
+[31-Jan-2017 03:52:48 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/index.phtml:0

@@ -8,6 +8,9 @@ final class Person extends BaseObject {
     private $email;
     private $username;
     private $password;
+    private $role_fk;
+    private $security_question_fk;
+    private $security_answer;
 
     public static function compareLast($m, $n) {
         if ($m->last_name == $n->last_name)
@@ -65,6 +68,40 @@ final class Person extends BaseObject {
 
     public function setPassword($password) {
         $this->password = $password;
+    }
+    
+    public function getRoleFK() {
+        if (is_numeric($this->role_fk)) {
+            $roleMapper = new RoleMapper();
+            $this->role_fk = $roleMapper->FindBy(array('id' => $this->role_fk));
+        } elseif (empty($this->role_fk))
+            $this->role_fk = new Role();
+        return $this->role_fk;
+    }
+
+    public function setRoleFK($role_fk) {
+        $this->role_fk = $role_fk;
+    }
+    
+    public function getSecurityQuestionFK() {
+        if (is_numeric($this->security_question_fk)) {
+            $securityQuestionMapper = new PersonSecurityQuestionMapper();
+            $this->security_question_fk = $securityQuestionMapper->FindBy(array('id' => $this->security_question_fk));
+        } elseif (empty($this->security_question_fk))
+            $this->$security_question_fk = new PersonSecurityQuestion();
+        return $this->security_question_fk;
+    }
+
+    public function setSecurityQuestionFK($security_question_fk) {
+        $this->security_question_fk = $security_question_fk;
+    }
+    
+    public function getSecurityAnswer() {
+        return $this->security_answer;
+    }
+
+    public function setSecurityAnswer($security_answer) {
+        $this->security_answer = $security_answer;
     }
 
 }
