@@ -1,0 +1,202 @@
+<div class="container">
+    <h1>Edit Profile</h1>
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          Save changes upon editing profile information.
+        </div>
+        <h3>Personal Information</h3>
+        
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="Jane" type="text" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="Bishop" type="text" readonly>
+            </div>
+          </div>
+                 <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="janesemail@gmail.com" type="text">
+            </div>
+          </div>
+
+               <div class="form-group">
+            <label class="col-lg-3 control-label">Phone Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="2484958847" type="text">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Hospital:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Location:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="" type="text">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Time Zone:</label>
+            <div class="col-lg-8">
+              <div class="ui-select">
+                <select id="user_time_zone" class="form-control">
+                  <option value="Hawaii">(GMT-10:00) Hawaii</option>
+                  <option value="Alaska">(GMT-09:00) Alaska</option>
+                  <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                  <option value="Arizona">(GMT-07:00) Arizona</option>
+                  <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                  <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                  <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                  <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <h3>Education</h3>
+                  <div class="form-group">
+            <label class="col-lg-3 control-label">Specialty:</label>
+            <div class="col-lg-8">
+              <div class="ui-select">
+                <select id="doctor_specialty" class="form-control"></select>
+                <script> $(function() { $("#doctor_specialty").jCombo("/apps/Person/model/getDoctorSpecialty.php");});</script>
+                
+              </div>
+            </div>
+          </div>
+
+           <div class="form-group">
+            <label class="col-lg-3 control-label">Undergraduate Education:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="Oakland University, Computer Science, B.S." type="text">
+            </div>
+          </div>
+
+            <div class="form-group">
+            <label class="col-lg-3 control-label">Graduate Education:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="Wayne State Medical School." type="text">
+            </div>
+            </div>
+
+                <div class="form-group">
+            <label class="col-lg-3 control-label">Residency:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="Henry Ford, Emergency Medicine." type="text">
+            </div>
+            </div>
+<h3>Other</h3>
+              <div class="form-group">
+    <label class="col-lg-3 control-label">Are you accepting new patients?</label>
+    <div class="col-lg-8">
+      <label class="radio-inline">
+        <input name="radio" checked="checked" type="radio">Yes
+      </label>
+      <label class="radio-inline">
+        <input name="radio" checked="checked" type="radio">No
+      </label>
+    </div>
+  </div>
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">Accepted Insurances</label>
+    <div class="col-lg-8">
+      <label class="checkbox-inline">
+        <input name="radio" type="checkbox">Blue Cross Blue Shield
+      </label>
+      <label class="checkbox-inline">
+        <input name="radio" type="checkbox">Aetna
+      </label>
+      <label class="checkbox-inline">
+        <input name="radio" checked="checked" type="checkbox">CIGNA
+      </label>
+      <label class="checkbox-inline">
+        <input name="radio" type="checkbox">Capital Health
+      </label>
+      <label class="checkbox-inline">
+        <input name="radio" type="checkbox">Other
+      </label>
+      <p class="help-block"><small>Select all that apply</small></p>
+    </div>
+  </div>
+
+
+
+
+
+
+            <div class="form-group">
+            <label class="col-lg-3 control-label">Notes:</label>
+            <div class="col-lg-8">
+              <textarea class="form-control" value="Insert other important info here" type="text"></textarea>
+            </div>
+            </div>
+
+
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input class="btn btn-primary" value="Save Changes" type="button">
+              <span></span>
+              <input class="btn btn-default" value="Cancel" type="reset">
+            </div>
+          </div>
+        </form>
+<!-- change password form column -->
+      <h3>Change Password</h3>
+      <form class="form-horizontal" role="form">
+              <div class="form-group">
+            <label class="col-md-3 control-label">Current Password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">New Password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password">
+            </div>
+          </div>
+            <div class="form-group">
+            <label class="col-md-3 control-label">Confirm Password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password">
+              </div>
+            </div>
+      </form>
+             <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input class="btn btn-primary" value="Change Password" type="button">
+              <span></span>
+            </div>
+          </div>
+          </div>
+      </div>
+  </div>
+</div><!-- end contaier -->
+
+<hr>

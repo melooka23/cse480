@@ -4,3 +4,18 @@
 [31-Jan-2017 03:52:48 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
 [31-Jan-2017 03:52:48 UTC] PHP Stack trace:
 [31-Jan-2017 03:52:48 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/index.phtml:0
+[13-Feb-2017 18:55:04 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
+[13-Feb-2017 18:55:04 UTC] PHP Stack trace:
+[13-Feb-2017 18:55:04 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/index.phtml:0
+[14-Feb-2017 22:47:21 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
+[14-Feb-2017 22:47:21 UTC] PHP Stack trace:
+[14-Feb-2017 22:47:21 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/index.phtml:0
+[15-Feb-2017 01:18:43 UTC] PHP Fatal error:  Class 'Flash' not found in /home/ubuntu/workspace/scripts_development/ModelObjectCreator.php on line 13
+[15-Feb-2017 01:18:43 UTC] PHP Stack trace:
+[15-Feb-2017 01:18:43 UTC] PHP   1. {main}() /home/ubuntu/workspace/scripts_development/ModelObjectCreator.php:0
+[15-Feb-2017 01:23:02 UTC] PHP Fatal error:  Class 'FieldSubmit' not found in /home/ubuntu/workspace/scripts_development/ModelObjectCreator.php on line 177
+[15-Feb-2017 01:23:02 UTC] PHP Stack trace:
+[15-Feb-2017 01:23:02 UTC] PHP   1. {main}() /home/ubuntu/workspace/scripts_development/ModelObjectCreator.php:0
+[15-Feb-2017 01:23:57 UTC] PHP Fatal error:  Class 'FieldSubmit' not found in /home/ubuntu/workspace/scripts_development/ModelObjectCreator.php on line 178
+[15-Feb-2017 01:23:57 UTC] PHP Stack trace:
+[15-Feb-2017 01:23:57 UTC] PHP   1. {main}() /home/ubuntu/workspace/scripts_development/ModelObjectCreator.php:0

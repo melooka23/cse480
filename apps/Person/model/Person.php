@@ -11,6 +11,9 @@ final class Person extends BaseObject {
     private $role_fk;
     private $security_question_fk;
     private $security_answer;
+    private $gender;
+    private $phone_number;
+    private $location;
 
     public static function compareLast($m, $n) {
         if ($m->last_name == $n->last_name)
@@ -102,6 +105,29 @@ final class Person extends BaseObject {
 
     public function setSecurityAnswer($security_answer) {
         $this->security_answer = $security_answer;
+    }
+    
+    public function getGender() {
+        return $this->gender;
+    }
+
+    public function setGender($gender) {
+        $this->gender = $gender;
+    }
+    
+    public function getPhoneNumber() {
+        return $this->phone_number;
+    }
+
+    public function setPhoneNumber($phone_number) {
+        $this->phone_number = $phone_number;
+    }
+     public function getLocation() {
+        return $this->location;
+    }
+
+    public function setLocation($location) {
+        $this->location = $location;
     }
 
 }

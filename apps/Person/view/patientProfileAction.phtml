@@ -1,0 +1,298 @@
+<div class="container">
+    <h1>Edit Profile</h1>
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          Save changes upon editing profile information.
+        </div>
+        <h3>Personal Information</h3>
+        
+        <form class="form-horizontal" method='post' role="form" id="patientProfile" action="#">
+          
+          <input type="hidden" value="<?php print_r($this->thisprofile->getID());?>" name="profile[id]">
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="<?php echo $this->current_person->getFirstName(); ?>" type="text" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="<?php echo $this->current_person->getLastName(); ?>" type="text" readonly>
+            </div>
+          </div>
+                 <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="<?php echo $this->current_person->getEmail(); ?>" type="text" readonly>
+            </div>
+          </div>
+
+               <div class="form-group">
+            <label class="col-lg-3 control-label">Phone Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" value="<?php echo $this->current_person->getPhoneNumber(); ?>" type="text" readonly>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Location:</label>
+            <div class="col-lg-8">
+              <input class="form-control" <?php if($this->current_person->getLocation() != null){ ?>value="<?php echo $this->current_person->getLocation(); ?>" <?php } ?> name="location" type="text">
+            </div>
+          </div>
+<h3>Patient History</h3>
+
+  
+  <div class="form-group">
+<label class="col-lg-3 control-label">Medications:</label>
+<div class=col-lg-8>
+  <table class="table table-hover" id="medicationsTable">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Medication</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th>Perscribed By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="display:none" >
+                    <td>
+                        <input name="chk[]" type="checkbox">
+                        <input type="hidden" name="medicationIDs[]">
+                    </td>
+                    <td>
+                        <input type="text" name="medication[]" size="20">
+                    </td>
+                    <td>
+                            <input type="text" name="dosage[]" size="20">
+                        </td>
+                        <td>
+                            <input type="text" name="frequency[]" size="20">
+                        </td>
+                        <td>
+                            <input type="text" name="perscribed_by[]" size="20">
+                        </td>
+                </tr>
+                <?php if ($medication_list == null) { ?>
+                    <tr>
+                        <td>
+                            <input name="chk[]" type="checkbox">
+                            <input type="hidden" name="medicationIDs[]">
+                        </td>
+                        <td>
+                            <input type="text" name="medication[]" size="20">
+                        </td>
+                        <td>
+                            <input type="text" name="dosage[]" size="20">
+                        </td>
+                        <td>
+                            <input type="text" name="frequency[]" size="20">
+                        </td>
+                        <td>
+                            <input type="text" name="perscribed_by[]" size="20">
+                        </td>
+                    </tr>
+                <?php } else { ?>
+                <?php foreach ($medication_list as $medication) { ?>
+                    <tr>
+                        <td>
+                            <input name="chk[]" type="checkbox">
+                            <input type="hidden" name="medicationIDs[]" value='<?php echo $medication->getID(); ?>'>
+                        </td>
+                        <td>
+                            <input type="text" name="medication[]" size="20" value="<?php echo $medication->getMedicationName(); ?>">
+                        </td>
+                        <td>
+                            <input type="text" name="dosage[]" size="20" value="<?php echo $medication->getDosage(); ?>">
+                        </td>
+                        <td>
+                            <input type="text" name="frequency[]" size="20" value="<?php echo $medication->getFrequency(); ?>">
+                        </td>
+                        <td>
+                            <input type="text" name="perscribed_by[]" size="20" value="<?php echo $medication->getPrescribedBy(); ?>">
+                        </td>
+                    </tr>
+                <?php }
+                } ?>
+            </tbody>
+        </table>
+            <button type="button" class="btn btn-success" value="Add Medication" onClick="addRow('medicationsTable');">Add</button>
+            <button type="button" class="btn btn-default" value="Remove Medication(s)" onClick="deleteRow('medicationsTable');">Remove</button>
+            <br>
+      </div>
+      </div>
+
+      <div class="form-group">
+    <label class="col-lg-3 control-label">Medication allergies:</label>
+    <div class="col-lg-8">
+      <textarea class="form-control" name="profile[medication_allergy]" type="text"><?php if($this->thisprofile->getMedicationAllergy() != null){ echo $this->thisprofile->getMedicationAllergy(); } ?></textarea>
+    </div>
+  </div>
+
+        <div class="form-group">
+    <label class="col-lg-3 control-label">How often do you use tobacco?</label>
+    <div class="col-lg-8">
+      <label class="radio-inline">
+        <input name="profile[tobacco_use]" <?php if($this->thisprofile->getTobaccoUse() == 'Daily'){ echo ' checked="checked" '; } ?>value="Daily" type="radio">Daily
+      </label>
+      <label class="radio-inline">
+        <input name="profile[tobacco_use]" <?php if($this->thisprofile->getTobaccoUse() == 'Weekly'){ echo ' checked="checked" '; } ?>value="Weekly" type="radio">Weekly
+      </label>
+         <label class="radio-inline">
+        <input name="profile[tobacco_use]" <?php if($this->thisprofile->getTobaccoUse() == 'Monthly'){ echo ' checked="checked" '; } ?>value="Monthly" type="radio">Monthly
+      </label>
+         <label class="radio-inline">
+        <input name="profile[tobacco_use]" <?php if($this->thisprofile->getTobaccoUse() == 'Occasionally'){ echo ' checked="checked" '; } ?>value="Occasionally" type="radio">Occasionally
+      </label>
+         <label class="radio-inline">
+        <input name="profile[tobacco_use]" <?php if($this->thisprofile->getTobaccoUse() == 'Never'){ echo ' checked="checked" '; } ?>value="Never" type="radio">Never
+      </label>
+    </div>
+  </div>
+
+        <div class="form-group">
+    <label class="col-lg-3 control-label">How often do you consume alcohol?</label>
+    <div class="col-lg-8">
+      <label class="radio-inline">
+        <input name="profile[alcohol_use]" <?php if($this->thisprofile->getAlcoholUse() == 'Daily'){ echo ' checked="checked" '; } ?> value="Daily" type="radio">Daily
+      </label>
+      <label class="radio-inline">
+        <input name="profile[alcohol_use]" <?php if($this->thisprofile->getAlcoholUse() == 'Weekly'){ echo ' checked="checked" '; } ?> value="Weekly" type="radio">Weekly
+      </label>
+        <label class="radio-inline">
+        <input name="profile[alcohol_use]" <?php if($this->thisprofile->getAlcoholUse() == 'Montly'){ echo ' checked="checked" '; } ?> value="Monthly" type="radio">Monthly
+      </label>
+         <label class="radio-inline">
+        <input name="profile[alcohol_use]" <?php if($this->thisprofile->getAlcoholUse() == 'Occasionally'){ echo ' checked="checked" '; } ?> value="Occasionally" type="radio">Occasionally
+      </label>
+         <label class="radio-inline">
+        <input name="profile[alcohol_use]" <?php if($this->thisprofile->getAlcoholUse() == 'Never'){ echo ' checked="checked" '; } ?> value="Never" type="radio">Never
+      </label>
+    </div>
+  </div>
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">List the conditions that apply to your immediate relatives:</label>
+    <div class="col-lg-8">
+      <textarea class="form-control" name="profile[family_history]" type="text"><?php if($this->thisprofile->getFamilyHistory() != null){ echo $this->thisprofile->getFamilyHistory(); } ?></textarea>
+    </div>
+  </div>
+
+<h3>Insurance Information</h3>
+
+  <div class="form-group">
+            <label class="col-lg-3 control-label">Insurance Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" <?php if($this->thisprofile->getInsuranceName() != null){ ?>value="<?php echo $this->thisprofile->getInsuranceName(); ?>" <?php } ?> name="profile[insurance_name]" type="text">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Insurance Group #:</label>
+            <div class="col-lg-8">
+              <input class="form-control" <?php if($this->thisprofile->getInsuranceGroupNumber() != null){ ?>value="<?php echo $this->thisprofile->getInsuranceGroupNumber(); ?>" <?php } ?> name="profile[insurance_group_number]" type="text">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Insurance Policy Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" <?php if($this->thisprofile->getInsurancePolicyNumber() != null){ ?>value="<?php echo $this->thisprofile->getInsurancePolicyNumber(); ?>" <?php } ?> name="profile[insurance_policy_number]" type="text">
+            </div>
+          </div>
+
+<h3>Notes</h3>
+            <div class="form-group">
+            <label class="col-lg-3 control-label">Notes:</label>
+            <div class="col-lg-8">
+              <textarea class="form-control" name="profile[notes]" Placeholder="Insert other important info here" type="text"><?php if($this->thisprofile->getNotes() != null){ echo $this->thisprofile->getNotes(); } ?></textarea>
+            </div>
+            </div>
+
+
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input class="btn btn-primary" type="submit" name="save" value="Save Changes">
+              <span></span>
+              <input class="btn btn-default" value="Cancel" type="reset">
+            </div>
+          </div>
+        </form>
+<!-- change password form column -->
+      <!--<h3>Change Password</h3>-->
+      <!--<form class="form-horizontal" role="form">-->
+      <!--        <div class="form-group">-->
+      <!--      <label class="col-md-3 control-label">Current Password:</label>-->
+      <!--      <div class="col-md-8">-->
+      <!--        <input class="form-control" type="password">-->
+      <!--      </div>-->
+      <!--    </div>-->
+      <!--    <div class="form-group">-->
+      <!--      <label class="col-md-3 control-label">New Password:</label>-->
+      <!--      <div class="col-md-8">-->
+      <!--        <input class="form-control" type="password">-->
+      <!--      </div>-->
+      <!--    </div>-->
+      <!--      <div class="form-group">-->
+      <!--      <label class="col-md-3 control-label">Confirm Password:</label>-->
+      <!--      <div class="col-md-8">-->
+      <!--        <input class="form-control" type="password">-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--</form>-->
+      <!--       <div class="form-group">-->
+      <!--      <label class="col-md-3 control-label"></label>-->
+      <!--      <div class="col-md-8">-->
+      <!--        <input class="btn btn-primary" value="Change Password" type="button">-->
+      <!--        <span></span>-->
+      <!--      </div>-->
+      <!--    </div>-->
+          </div>
+      </div>
+  </div>
+</div>
+<hr>
+
+<script>
+  function addRow(tableID) {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        var colCount = table.rows[1].cells.length;
+        for (var i = 0; i < colCount; i++) {
+            var newcell = row.insertCell(i);
+            newcell.innerHTML = table.rows[1].cells[i].innerHTML;
+        }
+    }
+    
+    function deleteRow(tableID) {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        for (var i = 0; i < rowCount; i++) {
+            var row = table.rows[i];
+            var chkbox = row.cells[0].firstElementChild;
+            if (null !== chkbox && true === chkbox.checked) {
+                table.deleteRow(i);
+                rowCount--;
+                i--;
+            }
+        }
+    }
+</script>

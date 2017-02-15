@@ -18,7 +18,15 @@ final class PersonController extends BaseController {
     public function registerPersonAction() {
         self::getSubController();
     }
-
+    
+    public function patientProfileAction() {
+        self::getSubController();
+    }
+    
+    public function doctorProfileAction() {
+        self::getSubController();
+    }
+    
 }
 
 ?>

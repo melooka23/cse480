@@ -11,6 +11,7 @@
             <input type="text" name="register[first_name]" placeholder="First Name" data-parsley-trigger="change" data-parsley-required="" autofocus />
             <input type="text" name="register[last_name]" placeholder="Last Name" data-parsley-trigger="change" data-parsley-required="" />
             <input type="email" name="register[email]" placeholder="E-mail" data-parsley-trigger="change" data-parsley-required="" />
+            <input type="tel" name="register[phone_number]" placeholder="Phone Number" data-parsley-trigger="change" data-parsley-required="" />
             <input type="text" name="register[username]" placeholder="Username" data-parsley-trigger="change" data-parsley-required="" />
             <input type="password" id="password" name="register[password]" placeholder="password" data-parsley-trigger="change" data-parsley-required="" />
              <input type="password" placeholder="confirm password" data-parsley-trigger="change" data-parsley-required="" data-parsley-equalto="#password" />
@@ -19,6 +20,13 @@
              
                 <input name="register[role_fk]" id="checky" value="2" type="radio" data-parsley-trigger="change" data-parsley-required="" /><label class="terms">I am a patient</label>
             </div>
+            
+            <div class="checkboxy">
+                <input name="register[gender]" id="checky" value="M" type="radio" /><label class="terms">Male</label>
+             
+                <input name="register[gender]" id="checky" value="F" type="radio" data-parsley-trigger="change" data-parsley-required="" /><label class="terms">Female</label>
+            </div>
+            
             <p>Select a security question:</p>
             <select id="security-question" name="register[security_question_fk]" style="margin-top: 0px;" data-parsley-trigger="submit" data-parsley-required=""></select>
             <script> $(function() { $("#security-question").jCombo("/apps/Person/model/getPersonSecurityQuestions.php");});</script>

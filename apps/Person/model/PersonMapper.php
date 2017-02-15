@@ -16,7 +16,10 @@ class PersonMapper extends BaseDataMapper {
             'password' => $person->getPassword(),
             'role_fk' => $person->getRoleFK()->getID(),
             'security_question_fk' => $person->getSecurityQuestionFK()->getID(),
-            'security_answer' => $person->getSecurityAnswer());
+            'security_answer' => $person->getSecurityAnswer(),
+            'gender' => $person->getGender(),
+            'phone_number' => $person->getPhoneNumber(),
+            'location' => $person->getLocation());
 
         $person->setID($this->adapter->insert($this->entityTable, $person_values));
         return $person;
@@ -27,37 +30,44 @@ class PersonMapper extends BaseDataMapper {
         $db_compare_person = $this->FindBy(array('id' => $person->getID()));
         $update_fields = "";
         
-        if ($db_compare_person->getEmail() != $person->getEmail())
+        if ($person->getEmail() != null)
             if ($db_compare_person->getEmail() != $person->getEmail())
                 $update_fields['email'] = $person->getEmail();
+                
+        if ($person->getPhoneNumber() != null)
+            if ($db_compare_person->getPhoneNumber() != $person->getPhoneNumber())
+                $update_fields['phone_number'] = $person->getPhoneNumber();
+                
+        if ($person->getLocation() != null)
+            if ($db_compare_person->getLocation() != $person->getLocation())
+                $update_fields['location'] = $person->getLocation();
 
-        if ($db_compare_person->getFirstName() != $person->getFirstName())
+        if ($person->getFirstName() != null)
             if ($db_compare_person->getFirstName() != $person->getFirstName())
                 $update_fields['first_name'] = $person->getFirstName();
 
-        if ($db_compare_person->getLastName() != $person->getLastName())
+        if ($person->getLastName() != null)
             if ($db_compare_person->getLastName() != $person->getLastName())
                 $update_fields['last_name'] = $person->getLastName();
 
-        if ($db_compare_person->getUsername() != $person->getUsername())
+        if ($person->getUsername() != null)
             if ($db_compare_person->getUsername() != $person->getUsername())
                 $update_fields['username'] = $person->getUsername();
 
-        if ($db_compare_person->getPassword() != $person->getPassword())
+        if ($person->getPassword() != null)
             if ($db_compare_person->getPassword() != $person->getPassword())
                 $update_fields['password'] = $person->getPassword();
         
-        if ($db_compare_person->getRoleFK() != $person->getRoleFK())
-            if ($person->getRoleFK()->getID() != null)
-                if ($db_compare_person->getRoleFK()->getID() != $person->getRoleFK()->getID())
-                    $update_fields['role_fk'] = $person->getRoleFK()->getID();
+        if ($person->getRoleFK()->getID() != null)
+            if ($db_compare_person->getRoleFK()->getID() != $person->getRoleFK()->getID())
+                $update_fields['role_fk'] = $person->getRoleFK()->getID();
                     
-        if ($db_compare_person->getSecurityQuestionFK() != $person->getSecurityQuestionFK())
-            if ($person->getSecurityQuestionFK()->getID() != null)
-                if ($db_compare_person->getSecurityQuestionFK()->getID() != $person->getSecurityQuestionFK()->getID())
-                    $update_fields['security_question_fk'] = $person->getSecurityQuestionFK()->getID();
-                    
-        if ($db_compare_person->getSecurityAnswer() != $person->getSecurityAnswer())
+        
+        if ($person->getSecurityQuestionFK()->getID() != null)
+            if ($db_compare_person->getSecurityQuestionFK()->getID() != $person->getSecurityQuestionFK()->getID())
+                $update_fields['security_question_fk'] = $person->getSecurityQuestionFK()->getID();
+                
+        if ($person->getSecurityAnswer()!= null)
             if ($db_compare_person->getSecurityAnswer() != $person->getSecurityAnswer())
                 $update_fields['security_answer'] = $person->getSecurityAnswer();
             
