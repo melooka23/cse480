@@ -1,25 +1,25 @@
 <?php
 
-final class PatientMediction extends BaseObject {
+final class PatientMedication extends BaseObject {
 
-    private $id;
-    private $person_fk;
+    protected $id;
+    private $patient_fk;
     private $medication_name;
     private $dosage;
     private $frequency;
     private $prescribed_by;
     
-    public function getPersonFK() {
-        if (is_numeric($this->person_fk)) {
-            $personMapper = new PersonMapper();
-            $this->person_fk = $personMapper->FindBy(array('id' => $this->person_fk));
-        } elseif (empty($this->person_fk))
-            $this->person_fk = new Person();
-        return $this->person_fk;
+    public function getPatientFK() {
+        if (is_numeric($this->patient_fk)) {
+            $patientMapper = new PatientMapper();
+            $this->patient_fk = $patientMapper->FindBy(array('id' => $this->patient_fk));
+        } elseif (empty($this->patient_fk))
+            $this->patient_fk = new Patient();
+        return $this->patient_fk;
     }
 
-    public function setPersonFK($person_fk) {
-        $this->person_fk = $person_fk;
+    public function setPatientFK($patient_fk) {
+        $this->patient_fk = $patient_fk;
     }
 
     public function setMedicationName($medication_name) {
@@ -51,7 +51,7 @@ final class PatientMediction extends BaseObject {
     }
     
     public function getPrescribedBy(){
-        return $this->prescibed_by;
+        return $this->prescribed_by;
     }
 
 }

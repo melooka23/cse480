@@ -4,7 +4,7 @@ final class Doctor extends BaseObject {
 
     protected $id;
     protected $person_fk;
-    protected $degree_type;
+    protected $hospital;
     protected $specialty_fk;
     protected $undergraduate_school;
     protected $undergraduate_degree;
@@ -12,6 +12,10 @@ final class Doctor extends BaseObject {
     protected $graduate_school;
     protected $graduate_degree;
     protected $graduate_year;
+    protected $residency;
+    protected $accept_patient;
+    protected $accepted_insurance;
+    protected $notes;
 
 
     public function getPersonFK() {
@@ -27,12 +31,12 @@ final class Doctor extends BaseObject {
         $this->person_fk = $person_fk;
     }
 
-    public function setDegreeType($degree_type) {
-        $this->degree_type = $degree_type;
+    public function setHospital($hospital) {
+        $this->hospital = $hospital;
     }
 
-    public function getDegreeType() {
-        return $this->degree_type;
+    public function getHospital() {
+        return $this->hospital;
     }
     
     public function getSpecialtyFK() {
@@ -83,12 +87,41 @@ final class Doctor extends BaseObject {
      public function getGraduateDegree(){
         return $this->graduate_degree;
     }
-     public function seGraduateYear($graduate_year) {
+     public function setGraduateYear($graduate_year) {
         $this->graduate_year = $graduate_year;
     }
     
     public function getGraduateYear(){
         return $this->graduate_year;
+    }
+    public function setResidency($residency) {
+        $this->residency = $residency;
+    }
+    
+    public function getResidency(){
+        return $this->residency;
+    }
+    public function setAcceptPatient($accept_patient) {
+        $this->accept_patient = $accept_patient;
+    }
+    
+    public function getAcceptPatient(){
+        return $this->accept_patient;
+    }
+    public function setAcceptedInsurance($accepted_insurance) {
+        $this->accepted_insurance = $accepted_insurance;
+    }
+    
+    public function getAcceptedInsurance(){
+        return $this->accepted_insurance;
+    }
+    
+    public function setNotes($notes) {
+        $this->notes = $notes;
+    }
+    
+    public function getNotes(){
+        return $this->notes;
     }
 }
 

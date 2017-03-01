@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 col-md-2">
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          Mail <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Mail</a></li>
+          <li><a href="#">Contacts</a></li>
+          <li><a href="#">Tasks</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-9 col-md-10"></div>
+    <!--top filtering bar-->
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span><span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">All</a></li>
+          <li><a href="#">None</a></li>
+          <li><a href="#">Read</a></li>
+          <li><a href="#">Unread</a></li>
+          <li><a href="#">Starred</a></li>
+          <li><a href="#">Unstarred</a></li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          More <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Mark all as read</a></li>
+          <li class="divider"></li>
+          <li class="text-center"><small class="text-muted">Select messages to see more actions</small></li>
+        </ul>
+      </div>
+      <div class="pull-right">
+        <span class="text-muted"><b>1</b>–<b>50</b> of <b>277</b></span>
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </button>
+          <button type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-sm-3 col-md-2">
+      <div data-toggle="modal" data-target="#modalCompose">
+      <a id="open" href="#modalCompose" rel="modal:open" class="btn btn-danger btn-sm btn-block" role="button">COMPOSE</a>
+      </div>
+      <hr />
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#"><span class="badge pull-right">42</span> Inbox </a>
+        </li>
+        <li><a href="http://www.jquery2dotnet.com">Starred</a></li>
+        <li><a href="http://www.jquery2dotnet.com">Important</a></li>
+        <li><a href="http://www.jquery2dotnet.com">Sent Mail</a></li>
+        <li><a href="http://www.jquery2dotnet.com"><span class="badge pull-right">3</span>Drafts</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-md-10">
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox">
+                </label>
+              </div>
+              <span class="glyphicon glyphicon-star-empty"></span><span class="name" style="min-width: 120px;
+                                display: inline-block;"> Ambika Vohra</span> <span class="">yoyoyoyo</span>
+              <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span class="badge">12:10 AM</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
+                                </span></span>
+            </a>
+            <a href="#" class="list-group-item">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox">
+                </label>
+              </div>
+              <span class="glyphicon glyphicon-star-empty"></span><span class="name" style="min-width: 120px;
+                                        display: inline-block;">Joe Jones</span> <span class="">yoooo</span>
+              <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span class="badge">12:10 AM</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
+                                        </span></span>
+            </a>
+            <a href="#" class="list-group-item read">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox">
+                </label>
+              </div>
+              <span class="glyphicon glyphicon-star"></span><span class="name" style="min-width: 120px;
+                                                display: inline-block;">Dr. Seuss</span> <span class="">hiiiiii</span>
+              <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span class="badge">12:10 AM</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
+                                                </span></span>
+            </a>
+          </div>
+        </div>
+        <div class="tab-pane fade in" id="profile">
+          <div class="list-group">
+            <div class="list-group-item">
+              <span class="text-center">This tab is empty.</span>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade in" id="messages">
+          ...</div>
+        <div class="tab-pane fade in" id="settings">
+          This tab is empty.</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- modalfor compose messag -->
+    <div class="modal fade" id="modalCompose">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close hide-modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="document.getElementById('id01').style.display='none'" 
+        class="closebtn">&times;</span></button>
+            <h4 class="modal-title">Compose Message</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2" for="inputTo">To</label>
+                  <div class="col-sm-10"><input class="form-control" id="inputTo" placeholder="comma separated list of recipients" type="email"></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2" for="inputSubject">Subject</label>
+                  <div class="col-sm-10"><input class="form-control" id="inputSubject" placeholder="subject" type="text"></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-12" for="inputBody">Message</label>
+                  <div class="col-sm-12"><textarea class="form-control" id="inputBody" rows="18"></textarea></div>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button> 
+            <button type="button" class="btn btn-warning pull-left">Save Draft</button>
+            <button type="button" class="btn btn-primary ">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+            
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal compose message -->
+  
+  
+</div>
+<script>
+$(document).ready(function(){
+	$('.hide-modal').click(function(){
+		$('modalCompose').modal('hide');
+	}); 
+});
+</script>

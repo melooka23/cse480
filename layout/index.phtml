@@ -75,6 +75,8 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?php echo Utils::createLink('Main', 'list'); ?>">Home</a></li>
                         <li><a href="<?php if($this->current_person->getRoleFK()->getRole() == 'Patient'){echo Utils::createLink('Person', 'patientProfile');} else {echo Utils::createLink('Person', 'doctorProfile');}?>">My Profile</a></li>
+                        <li><a href="<?php echo Utils::createLink('Messages', 'inboxView'); ?>">Inbox</a></li>
+                        <li><a href="<?php if($this->current_person->getRoleFK()->getRole() == 'Patient'){echo Utils::createLink('Person', 'scheduleAppointment');} ?>">Schedule Appointments</a></li>
                         <!--<li><a href="services.html">Services</a></li>-->
                         <!--<li><a href="portfolio.html">Portfolio</a></li>-->
                         <!--<li class="dropdown">-->

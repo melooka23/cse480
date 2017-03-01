@@ -1,0 +1,27 @@
+body {
+  margin-top: 50px;
+}
+
+.nav-tabs .glyphicon:not(.no-margin) {
+  margin-right: 10px;
+}
+
+.tab-pane .list-group .checkbox {
+  display: inline-block;
+  margin: 0px;
+}
+
+.tab-pane .list-group .glyphicon {
+  margin-right: 5px;
+}
+
+.tab-pane .list-group .glyphicon:hover {
+  color: #FFBC00;
+}
+
+a.list-group-item.read {
+  color: #222;
+  background-color: #F3F3F3;
+}
+
+

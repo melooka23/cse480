@@ -1,0 +1,89 @@
+    <div class="container">
+      <div class="section text-center">
+        <h2 class="section-heading">Book Your <span>Appointment</span></h2><hr>
+      </div>  
+      <form class="form-horizontal" method='post' role="form" data-parsley-validate="" id="appointment" action="#">
+      <h4><center><b>Your Personal Details</b></center></h4>
+            <div class="row personal-info">    
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $this->current_person->getFirstName(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $this->current_person->getLastName(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Age</label>
+                  <input type="text" class="form-control" id="age" name="age" maxlength="3"  placeholder="Enter Age" required>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Gender</label>
+                  <input type="text" class="form-control" id="gender"  value="<?php echo $this->current_person->getGender(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $this->current_person->getPhoneNumber(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>E-Mail</label>
+                  <input type="email" class="form-control" id="email" name="email" value="<?php echo $this->current_person->getEmail(); ?>" readonly>
+                </div>
+              </div>        
+            </div><br>
+          <h4><center><b>Appointment Schedule</b></center></h4><br>
+            <div class="row">    
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Physician</label>
+                  <select class="form-control" id="physician" name="physician" required>
+                    <option selected disabled>Select Physician</option>
+                    <option value="Physician 1">Physician 1</option>
+                    <option value="Physician 2">Physician 2</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Appointment Date</label>
+                  <input type="date" class="form-control date-pick" id="appointmentdate" placeholder="Appointment Date" required>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Time</label>
+                  <select class="form-control" id="time" name="time" required>
+                    <option selected disabled>Select Time</option>
+                    <option value="Time 1">Time 1</option>
+                    <option value="Time 2">Time 2</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label>Your Problem</label>
+                  <textarea class="form-control" name="problem" id="problem" placeholder="Insert reason for appointment" required></textarea>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label>Message</label>
+                  <textarea class="form-control" name="message" id="message" placeholder="Insert any other important information"></textarea>
+                </div>
+              </div>        
+            </div>
+            <center><button id="submit" type="submit" name="submit">Book Appointment</button></center><br>
+          </form>     
+    </div>
+  </div>   

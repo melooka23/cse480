@@ -11,68 +11,53 @@
       
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <div class="alert alert-info alert-dismissable">
-          <a class="panel-close close" data-dismiss="alert">×</a> 
+        <div id= "alert" class="alert alert-info alert-dismissable">
+          <a class="close" data-dismiss="alert" onclick="document.getElementById('alert').style.display='none'">&times;</a>
           <i class="fa fa-coffee"></i>
           Save changes upon editing profile information.
         </div>
         <h3>Personal Information</h3>
         
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" method= "post" role="form" id="doctorProfile" action="#">
+          
+          <input type="hidden" value="<?php print_r($this->thisprofile->getID());?>" name="doctorprofile[id]">
+          
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="Jane" type="text" readonly>
+              <input class="form-control" value="<?php echo $this->current_person->getFirstName(); ?>" type="text" readonly>
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="Bishop" type="text" readonly>
+              <input class="form-control" value="<?php echo $this->current_person->getLastName(); ?>" type="text" readonly>
             </div>
           </div>
                  <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="janesemail@gmail.com" type="text">
+              <input class="form-control" value="<?php echo $this->current_person->getEmail(); ?>" type="text" readonly>
             </div>
           </div>
 
                <div class="form-group">
             <label class="col-lg-3 control-label">Phone Number:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="2484958847" type="text">
+              <input class="form-control" value="<?php echo $this->current_person->getPhoneNumber(); ?>" type="text" readonly>
             </div>
           </div>
           
           <div class="form-group">
             <label class="col-lg-3 control-label">Hospital:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="" type="text">
+              <input class="form-control" <?php if($this->thisprofile->getHospital() != null){ ?>value="<?php echo $this->thisprofile->getHospital(); ?>" <?php } ?> name="doctorprofile[hospital]" type="text">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label">Location:</label>
+            <label class="col-lg-3 control-label">Address:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="" type="text">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Time Zone:</label>
-            <div class="col-lg-8">
-              <div class="ui-select">
-                <select id="user_time_zone" class="form-control">
-                  <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                  <option value="Alaska">(GMT-09:00) Alaska</option>
-                  <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                  <option value="Arizona">(GMT-07:00) Arizona</option>
-                  <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                  <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                  <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                  <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                </select>
-              </div>
+              <input class="form-control" <?php if($this->current_person->getLocation() != null){ ?>value="<?php echo $this->current_person->getLocation(); ?>" <?php } ?> name="location" type="text">
             </div>
           </div>
           
@@ -81,31 +66,54 @@
             <label class="col-lg-3 control-label">Specialty:</label>
             <div class="col-lg-8">
               <div class="ui-select">
-                <select id="doctor_specialty" class="form-control"></select>
-                <script> $(function() { $("#doctor_specialty").jCombo("/apps/Person/model/getDoctorSpecialty.php");});</script>
+                <select id="doctor_specialty" name="doctorprofile[specialty_fk]" class="form-control"></select>
+                <script> $(function() { $("#doctor_specialty").jCombo("/apps/Person/model/getDoctorSpecialty.php"<?php if($this->thisprofile->getSpecialtyFK()->getID() != null){ ?>, {selected_value: "<?php echo $this->thisprofile->getSpecialtyFK()->getID(); ?>"}<?php } ?>);});</script>
                 
               </div>
             </div>
           </div>
 
            <div class="form-group">
-            <label class="col-lg-3 control-label">Undergraduate Education:</label>
+            <label class="col-lg-3 control-label">Undergraduate Degree:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="Oakland University, Computer Science, B.S." type="text">
+              <input class="form-control" name="doctorprofile[undergraduate_degree]" <?php if($this->thisprofile->getUndergraduateDegree() != null){ ?>value="<?php echo $this->thisprofile->getUndergraduateDegree(); ?>" <?php } ?> type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Undergraduate School:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="doctorprofile[undergraduate_school]"<?php if($this->thisprofile->getUndergraduateSchool() != null){ ?>value="<?php echo $this->thisprofile->getUndergraduateSchool(); ?>" <?php } ?> type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Undergraduate Year:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="doctorprofile[undergraduate_year]"<?php if($this->thisprofile->getUndergraduateYear() != null){ ?>value="<?php echo $this->thisprofile->getUndergraduateYear(); ?>" <?php } ?> type="text">
             </div>
           </div>
 
             <div class="form-group">
-            <label class="col-lg-3 control-label">Graduate Education:</label>
+            <label class="col-lg-3 control-label">Graduate Degree:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="Wayne State Medical School." type="text">
+              <input class="form-control" name="doctorprofile[graduate_degree]"<?php if($this->thisprofile->getGraduateDegree() != null){ ?>value="<?php echo $this->thisprofile->getGraduateDegree(); ?>" <?php } ?> type="text">
             </div>
             </div>
-
-                <div class="form-group">
+            <div class="form-group">
+            <label class="col-lg-3 control-label">Graduate School:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="doctorprofile[graduate_school]"<?php if($this->thisprofile->getGraduateSchool() != null){ ?>value="<?php echo $this->thisprofile->getGraduateSchool(); ?>" <?php } ?> type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Graduate Year:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="doctorprofile[graduate_year]"<?php if($this->thisprofile->getGraduateYear() != null){ ?>value="<?php echo $this->thisprofile->getGraduateYear(); ?>" <?php } ?> type="text">
+            </div>
+          </div>
+            <div class="form-group">
             <label class="col-lg-3 control-label">Residency:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="Henry Ford, Emergency Medicine." type="text">
+              <input class="form-control" name="doctorprofile[residency]"<?php if($this->thisprofile->getResidency() != null){ ?>value="<?php echo $this->thisprofile->getResidency(); ?>" <?php } ?> type="text">
             </div>
             </div>
 <h3>Other</h3>
@@ -113,35 +121,20 @@
     <label class="col-lg-3 control-label">Are you accepting new patients?</label>
     <div class="col-lg-8">
       <label class="radio-inline">
-        <input name="radio" checked="checked" type="radio">Yes
+        <input name="doctorprofile[accept_patient]" <?php if($this->thisprofile->getAcceptPatient() == 'Yes'){ echo ' checked="checked" '; } ?>value="Yes" type="radio">Yes
       </label>
       <label class="radio-inline">
-        <input name="radio" checked="checked" type="radio">No
+        <input name="doctorprofile[accept_patient]" <?php if($this->thisprofile->getAcceptPatient() == 'No'){ echo ' checked="checked" '; } ?>value="No" type="radio">No
       </label>
     </div>
   </div>
-
-<div class="form-group">
-    <label class="col-lg-3 control-label">Accepted Insurances</label>
-    <div class="col-lg-8">
-      <label class="checkbox-inline">
-        <input name="radio" type="checkbox">Blue Cross Blue Shield
-      </label>
-      <label class="checkbox-inline">
-        <input name="radio" type="checkbox">Aetna
-      </label>
-      <label class="checkbox-inline">
-        <input name="radio" checked="checked" type="checkbox">CIGNA
-      </label>
-      <label class="checkbox-inline">
-        <input name="radio" type="checkbox">Capital Health
-      </label>
-      <label class="checkbox-inline">
-        <input name="radio" type="checkbox">Other
-      </label>
-      <p class="help-block"><small>Select all that apply</small></p>
-    </div>
-  </div>
+  
+  <div class="form-group">
+            <label class="col-lg-3 control-label">Accepted Insurances:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="doctorprofile[accepted_insurance]"<?php if($this->thisprofile->getAcceptedInsurance() != null){ ?>value="<?php echo $this->thisprofile->getAcceptedInsurance(); ?>" <?php } ?> type="text">
+            </div>
+            </div>
 
 
 
@@ -151,7 +144,7 @@
             <div class="form-group">
             <label class="col-lg-3 control-label">Notes:</label>
             <div class="col-lg-8">
-              <textarea class="form-control" value="Insert other important info here" type="text"></textarea>
+              <textarea class="form-control" name="doctorprofile[notes]" Placeholder="Insert other important info here" type="text"><?php if($this->thisprofile->getNotes() != null){ echo $this->thisprofile->getNotes(); } ?></textarea>
             </div>
             </div>
 
@@ -159,44 +152,54 @@
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
-              <input class="btn btn-primary" value="Save Changes" type="button">
-              <span></span>
+              <input class="btn btn-primary" type="submit" name="save" value="Save Changes">
+              <span></span> 
               <input class="btn btn-default" value="Cancel" type="reset">
             </div>
           </div>
         </form>
+        
 <!-- change password form column -->
-      <h3>Change Password</h3>
-      <form class="form-horizontal" role="form">
-              <div class="form-group">
-            <label class="col-md-3 control-label">Current Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">New Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password">
-            </div>
-          </div>
-            <div class="form-group">
-            <label class="col-md-3 control-label">Confirm Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password">
-              </div>
-            </div>
-      </form>
-             <div class="form-group">
-            <label class="col-md-3 control-label"></label>
-            <div class="col-md-8">
-              <input class="btn btn-primary" value="Change Password" type="button">
-              <span></span>
-            </div>
-          </div>
+<!--      <h3>Change Password</h3>-->
+<!--      <form class="form-horizontal" role="form">-->
+<!--              <div class="form-group">-->
+<!--            <label class="col-md-3 control-label">Current Password:</label>-->
+<!--            <div class="col-md-8">-->
+<!--              <input class="form-control" type="password">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label class="col-md-3 control-label">New Password:</label>-->
+<!--            <div class="col-md-8">-->
+<!--              <input class="form-control" type="password">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--            <div class="form-group">-->
+<!--            <label class="col-md-3 control-label">Confirm Password:</label>-->
+<!--            <div class="col-md-8">-->
+<!--              <input class="form-control" type="password">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--      </form>-->
+<!--             <div class="form-group">-->
+<!--            <label class="col-md-3 control-label"></label>-->
+<!--            <div class="col-md-8">-->
+<!--              <input class="btn btn-primary" value="Change Password" type="button">-->
+<!--              <span></span>-->
+<!--            </div>-->
+<!--          </div>-->
+          
           </div>
       </div>
   </div>
 </div><!-- end contaier -->
 
 <hr>
+<script>
+$(document).ready(function(){
+  $("#aler").alert('show');
+    $(".close").click(function(){
+        $("#alert").alert('hide');
+    });
+});
+</script>

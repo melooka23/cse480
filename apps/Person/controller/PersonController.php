@@ -26,6 +26,12 @@ final class PersonController extends BaseController {
     public function doctorProfileAction() {
         self::getSubController();
     }
+    public function inboxViewAction() {
+        self::getSubController();
+    }
+     public function scheduleAppointmentAction() {
+        self::getSubController();
+    }
     
 }
 
