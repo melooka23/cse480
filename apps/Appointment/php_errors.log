@@ -1,0 +1,19 @@
+[15-Mar-2017 15:26:56 UTC] PHP Fatal error:  Call to a member function getID() on a non-object in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php on line 17
+[15-Mar-2017 15:26:56 UTC] PHP Stack trace:
+[15-Mar-2017 15:26:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php:0
+[15-Mar-2017 15:27:02 UTC] PHP Fatal error:  Call to a member function getID() on a non-object in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php on line 17
+[15-Mar-2017 15:27:02 UTC] PHP Stack trace:
+[15-Mar-2017 15:27:02 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php:0
+[15-Mar-2017 15:30:41 UTC] PHP Parse error:  syntax error, unexpected '$items' (T_VARIABLE) in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php on line 18
+[15-Mar-2017 15:31:30 UTC] PHP Parse error:  syntax error, unexpected '$items' (T_VARIABLE) in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php on line 18
+[15-Mar-2017 15:31:32 UTC] PHP Parse error:  syntax error, unexpected '$items' (T_VARIABLE) in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php on line 18
+[15-Mar-2017 15:31:32 UTC] PHP Parse error:  syntax error, unexpected '$items' (T_VARIABLE) in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php on line 18
+[15-Mar-2017 15:31:33 UTC] PHP Parse error:  syntax error, unexpected '$items' (T_VARIABLE) in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentDates.php on line 18
+[15-Mar-2017 17:22:09 UTC] PHP Fatal error:  Call to undefined method Appointment::getTimeFK() in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentTimes.php on line 17
+[15-Mar-2017 17:22:09 UTC] PHP Stack trace:
+[15-Mar-2017 17:22:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Appointment/model/getAppointmentTimes.php:0
+[15-Mar-2017 17:22:59 UTC] PHP Fatal error:  Call to undefined method Appointment::getTime() in /home/ubuntu/workspace/apps/Appointment/model/getAppointmentTimes.php on line 17
+[15-Mar-2017 17:22:59 UTC] PHP Stack trace:
+[15-Mar-2017 17:22:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Appointment/model/getAppointmentTimes.php:0
+[16-Mar-2017 01:35:59 UTC] PHP Fatal error:  Cannot use isset() on the result of a function call (you can use "null !== func()" instead) in /home/ubuntu/workspace/apps/Appointment/model/getDoctors.php on line 15
+[16-Mar-2017 01:36:29 UTC] PHP Fatal error:  Cannot use isset() on the result of a function call (you can use "null !== func()" instead) in /home/ubuntu/workspace/apps/Appointment/model/getDoctors.php on line 15

@@ -35,7 +35,7 @@ class Loader {
 // Class Loader
     public static function MyLoader($class) {
 // pull apps from DB eventually or directory structure
-        $apps = array("Main", "Person", "Messages");
+        $apps = array("Main", "Person", "Messages", "Appointment");
         $found = false;
         
         $path = "/";

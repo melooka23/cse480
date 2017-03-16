@@ -1,9 +1,41 @@
-<?php
+<div id="carousel-example" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example" data-slide-to="1"></li>
+    <li data-target="#carousel-example" data-slide-to="2"></li>
+  </ol>
 
-BaseView::DisplayTitle("This will be the home page");
-?>
-<form id="listactions">
+  <div class="carousel-inner">
+    <div class="item active">
+        <center>
+      <a href="<?php if($this->current_person->getRoleFK()->getRole() == 'Patient'){echo Utils::createLink('Person', 'patientProfile');} else {echo Utils::createLink('Person', 'doctorProfile');}?>"><img id="pic1" src="/public/images/homepage/slide6.jpg"/></a></center>
+      <div class="carousel-caption">
+        <h3><b>VIEW PROFILE PAGE</b></h3>
+        <p></p>
+      </div>
+    </div>
+    <div class="item">
+        <center>
+      <a href="<?php echo Utils::createLink('Appointment', 'scheduleAppointment'); ?>"><img src="/public/images/homepage/slide3.jpg" /></a></center>
+      <div class="carousel-caption">
+        <h3><b>Schedule an APPOINTMENT!</b></h3>
+        <p></p>
+      </div>
+    </div>
+    <div class="item">
+      <center>
+      <a href="<?php echo Utils::createLink('Messages', 'inboxView'); ?>"><img src="/public/images/homepage/slide5.jpg" /></a></center>
+      <div class="carousel-caption">
+        <h3><b>SEND MESSAGES TO DOCTOR!</b></h3>
+        <p></p>
+      </div>
+    </div>
+  </div>
 
-</form>
-
-
+  <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>

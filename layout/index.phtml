@@ -20,6 +20,12 @@
         <?php } else { ?>
         
         <!-- core CSS -->
+        <?php if ($this->action == 'inboxView') { ?>
+        <link href="public/css/inbox.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
+        <?php } ?>
+         <?php if ($this->action == 'listAction') { ?>
+        <link href="public/css/home.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
+        <?php } ?>
     <link href="public/css/bootstrap.min.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
     <link href="public/css/font-awesome.min.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
     <link href="public/css/animate.min.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
@@ -72,11 +78,11 @@
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav" id="myTab">
                         <li class="active"><a href="<?php echo Utils::createLink('Main', 'list'); ?>">Home</a></li>
                         <li><a href="<?php if($this->current_person->getRoleFK()->getRole() == 'Patient'){echo Utils::createLink('Person', 'patientProfile');} else {echo Utils::createLink('Person', 'doctorProfile');}?>">My Profile</a></li>
                         <li><a href="<?php echo Utils::createLink('Messages', 'inboxView'); ?>">Inbox</a></li>
-                        <li><a href="<?php if($this->current_person->getRoleFK()->getRole() == 'Patient'){echo Utils::createLink('Person', 'scheduleAppointment');} ?>">Schedule Appointments</a></li>
+                        <li><a href="<?php echo Utils::createLink('Appointment', 'scheduleAppointment'); ?>">Schedule Appointments</a></li>
                         <!--<li><a href="services.html">Services</a></li>-->
                         <!--<li><a href="portfolio.html">Portfolio</a></li>-->
                         <!--<li class="dropdown">-->
@@ -132,3 +138,7 @@
         
     </body>
 </html>
+<script>
+   $(document).ready(function(){
+});
+</script>

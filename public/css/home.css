@@ -1,0 +1,29 @@
+.carousel {
+    height: 300px;
+    overflow: hidden;
+    
+}
+
+#carousel-example
+{
+    margin-top: 100px;
+}
+
+.carousel .item {
+    min-width: 100%;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+}
+.carousel .active.left, .carousel .active.right {
+    left:0;
+    opacity:0;
+    z-index:2;
+}
+.carousel .next, .carousel .prev {
+    left:0;
+    opacity:1;
+    z-index:1;
+}

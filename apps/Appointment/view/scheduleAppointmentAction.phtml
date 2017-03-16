@@ -19,8 +19,8 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label>Age</label>
-                  <input type="text" class="form-control" id="age" name="age" maxlength="3"  placeholder="Enter Age" required>
+                  <label>Date of Birth</label>
+                  <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="<?php echo $patientProfile->getDateOfBirth(); ?>" readonly>
                 </div>
               </div>
               <div class="col-sm-4">
@@ -47,29 +47,45 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Physician</label>
-                  <select class="form-control" id="physician" name="physician" required>
-                    <option selected disabled>Select Physician</option>
-                    <option value="Physician 1">Physician 1</option>
-                    <option value="Physician 2">Physician 2</option>
-                  </select>
+                  <select class="form-control" id="physician" name="physician" required></select>
                 </div>
               </div>
+              <script> $(function() { $("#physician").jCombo("/apps/Appointment/model/getDoctors.php");});</script>
+              
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Appointment Date</label>
-                  <input type="date" class="form-control date-pick" id="appointmentdate" placeholder="Appointment Date" required>
+                  <select class="form-control" id="date" name="date" required></select>
                 </div>
               </div>
+              <script> $(function() { $("#date").jCombo("/apps/Appointment/model/getAppointmentDates.php?doctor_fk=", {parent: "#physician"});});</script>
+              
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label>Time</label>
-                  <select class="form-control" id="time" name="time" required>
-                    <option selected disabled>Select Time</option>
-                    <option value="Time 1">Time 1</option>
-                    <option value="Time 2">Time 2</option>
-                  </select>
+                  <label>Appointment Times</label>
+                  <select class="form-control" id="time" name="time" required></select>
                 </div>
               </div>
+              <script> $(function() { $("#time").jCombo("/apps/Appointment/model/getAppointmentTimes.php?appointment_fk=", {parent: "#date"});});</script>
+              
+              <!--<div class="col-sm-4">-->
+              <!--  <div class="form-group">-->
+              <!--    <label>Appointment Date</label>-->
+              <!--    <input type="date" class="form-control date-pick" id="appointmentdate" placeholder="Appointment Date" required>-->
+              <!--  </div>-->
+              <!--</div>-->
+              
+              
+              <!--<div class="col-sm-4">-->
+              <!--  <div class="form-group">-->
+              <!--    <label>Time</label>-->
+              <!--    <select class="form-control" id="time" name="time" required>-->
+              <!--      <option selected disabled>Select Time</option>-->
+              <!--      <option value="Time 1">Time 1</option>-->
+              <!--      <option value="Time 2">Time 2</option>-->
+              <!--    </select>-->
+              <!--  </div>-->
+              <!--</div>-->
               <div class="col-sm-8">
                 <div class="form-group">
                   <label>Your Problem</label>
@@ -83,7 +99,10 @@
                 </div>
               </div>        
             </div>
-            <center><button id="submit" type="submit" name="submit">Book Appointment</button></center><br>
-          </form>     
+              <div class="form-group">
+              <center><input class="btn btn-primary" id="bookAppointment" type="submit" name="Book Appointment" value="Book">
+                </center>
+           </div>
+          </form> 
     </div>
   </div>   

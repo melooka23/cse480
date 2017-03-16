@@ -19,3 +19,17 @@
 [15-Feb-2017 01:23:57 UTC] PHP Fatal error:  Class 'FieldSubmit' not found in /home/ubuntu/workspace/scripts_development/ModelObjectCreator.php on line 178
 [15-Feb-2017 01:23:57 UTC] PHP Stack trace:
 [15-Feb-2017 01:23:57 UTC] PHP   1. {main}() /home/ubuntu/workspace/scripts_development/ModelObjectCreator.php:0
+[07-Mar-2017 19:43:48 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
+[07-Mar-2017 19:43:48 UTC] PHP Stack trace:
+[07-Mar-2017 19:43:48 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/search.phtml:0
+[07-Mar-2017 19:43:48 UTC] PHP   2. include() /home/ubuntu/workspace/layout/search.phtml:1
+[07-Mar-2017 19:44:10 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
+[07-Mar-2017 19:44:10 UTC] PHP Stack trace:
+[07-Mar-2017 19:44:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/search.phtml:0
+[07-Mar-2017 19:44:10 UTC] PHP   2. include() /home/ubuntu/workspace/layout/search.phtml:1
+[13-Mar-2017 18:08:28 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
+[13-Mar-2017 18:08:28 UTC] PHP Stack trace:
+[13-Mar-2017 18:08:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/index.phtml:0
+[13-Mar-2017 18:08:55 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/layout/index.phtml on line 8
+[13-Mar-2017 18:08:55 UTC] PHP Stack trace:
+[13-Mar-2017 18:08:55 UTC] PHP   1. {main}() /home/ubuntu/workspace/layout/index.phtml:0
