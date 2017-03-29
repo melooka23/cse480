@@ -13,7 +13,8 @@ class AppointmentMapper extends BaseDataMapper {
             'date' => $appointment->getDate(),
             'appointment_time_fk' => $appointment->getAppointmentTimeFK()->getID(),
             'physician_fk' => $appointment->getPhysicianFK()->getID(),
-            'reson_for_visit' => $appointment->getReasonForVisit(),
+            'reason_for_visit' => $appointment->getReasonForVisit(),
+            'explanation' => $appointment->getExplanation(),
             'appointment_record_fk' => $appointment->getAppointmentRecordFK());
             
         $appointment->setID($this->adapter->insert($this->entityTable, $appointment_values));
@@ -27,7 +28,7 @@ class AppointmentMapper extends BaseDataMapper {
         
         if ($appointment->getPatientFK()->getID() != null)
         if ($db_compare_appointment->getPatientFK() != $appointment->getPatientFK())
-                $update_fields['patient_fk'] = $doctor->getPatientFK();
+                $update_fields['patient_fk'] = $appointment->getPatientFK()->getID();
 
         if ($appointment->getDate() != null)
         if ($db_compare_appointment->getDate() != $appointment->getDate())
@@ -41,11 +42,15 @@ class AppointmentMapper extends BaseDataMapper {
         if ($db_compare_appointment->getAppointmentTimeFK()->getID() != $appointment->getAppointmentTimeFK()->getID())
                 $update_fields['appointment_time_fk'] = $appointment->getAppointmentTimeFK()->getID();
 
-        if ($appointment->getResonForVisit() != null)
+        if ($appointment->getReasonForVisit() != null)
         if ($db_compare_appointment->getReasonForVisit() != $appointment->getReasonForVisit())
-                $update_fields['reson_for_visit'] = $appointment->getReasonForVisit();
+                $update_fields['reason_for_visit'] = $appointment->getReasonForVisit();
                 
-        if ($appointment->getAppointmentRecordFK != null)
+        if ($appointment->getExplanation() != null)
+        if ($db_compare_appointment->getExplanation() != $appointment->getExplanation())
+                $update_fields['explanation'] = $appointment->getExplanation();
+                
+        if ($appointment->getAppointmentRecordFK() != null)
         if ($db_compare_appointment->getAppointmentRecordFK() != $appointment->getAppointmentRecordFK())
                 $update_fields['appointment_record_fk'] = $appointment->getAppointmentRecordFK();
         
@@ -55,6 +60,12 @@ class AppointmentMapper extends BaseDataMapper {
         }
         else
             return 0;
+    }
+    
+    public function delete($id) {
+        if ($id instanceof Appointment)
+            $id = $id->getID();
+        return $this->adapter->delete($this->entityTable, 'id = ' . $id);
     }
 
     protected function createEntity(array $row) {

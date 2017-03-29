@@ -1,0 +1,342 @@
+<div class= "container">
+    <div class="section text-center">
+        <h2 class="section-heading">Electronic Medical Record System</span></h2>
+        <hr>
+     </div>
+     <form class="form-horizontal" method='post' role="form" data-parsley-validate="" id="emr" action="#">
+     <div class="row">
+        <div class="form-group">
+         <div style="border-bottom: solid; border-color: red;">
+         <h4><center><b>History of Present Illnesses</b></center></h4>
+            <table>
+                <colgroup>
+                    <col span="1" width="140">
+                    <col span="50" width="590">
+               </colgroup>
+                    <tr>
+                        <td>Presents with: </td>
+                        <td>
+                            <input type="text" class="form-control" id="complaint" name="complaint" placeholder="chief complaint" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Onset: </td>
+                        <td>
+                            <input type="number" class="form-control" name="" placeholder="Insert Number" required/>
+                        </td>
+                        <td><input type="radio" name="time" value="minutes ago" /> mins ago <br></td>
+                        <td><input type="radio" name="time" value="hours ago" /> hours ago <br></td>
+                        <td><input type="radio" name="time" value="days ago" /> days ago <br></td>
+                        <td><input type="radio" name="time" value="weeks ago" /> weeks ago <br></td>
+                        <td><input type="radio" name="time" value="chonic" /> chronic <br></td>
+                        <td><input type="radio" name="time" value="unknown" /> unknown <br></td>
+                        <td><input type="radio" name="time" value="other" /> other <br></td>
+                    </tr>
+                    <tr>
+                        <td>Course/Duration: <br></td>
+                        <td><input type="checkbox" name="duration" value="constant" /> Constant <br></td>
+                        <td><input type="checkbox" name="duration" value="improving" /> Improving <br></td>
+                        <td><input type="checkbox" name="duration" value="resolved" /> Resolved <br></td>
+                        <td><input type="checkbox" name="duration" value="worsening" /> Worsening<br></td>
+                        <td><input type="checkbox" name="duration" value="episodes" /> Episodes <br></td>
+                        <td><input type="checkbox" name="duration" value="fluctuatingintensity" /> Fluctuating Intensity <br></td>
+                        <td><input type="checkbox" name="duration" value="unknown" /> unknown <br></td>
+                        <td><input type="checkbox" name="duration" value="other" /> other <br></td>
+                    </tr>
+                    <tr>
+                        <td>Location: </td>
+                        <td><input type="checkbox" name="location" value="genealized" />Genealized </td>
+                    </tr>
+                    <tr>
+                        <td>Character: </td>
+                        <td><input type="checkbox" name="character" value="pain" />Pain </td>
+                        <td><input type="checkbox" name="character" value="swelling" />Swelling </td>
+                        <td><input type="checkbox" name="character" value="tingling" />Tingling </td>
+                        <td><input type="checkbox" name="character" value="numbness" />Numbness </td>
+                        <td><input type="checkbox" name="character" value="bleeding" />Bleeding</td>
+                        <td><input type="checkbox" name="character" value="redness" />Redness </td>
+                        <td><input type="checkbox" name="character" value="lossOfMobility" />Loss of Mobility<br> </td>
+                        <td><input type="checkbox" name="character" value="unknown" />Unknown </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="checkbox" name="character" value="other" />Other </td>
+                    </tr>
+                    <tr>
+                        <td>Degree at Onset: </td>
+                        <td><input type="radio" name="degree" value="minimal" />Minimal</td>
+                        <td><input type="radio" name="degree" value="moderate" />Moderate </td>
+                        <td><input type="radio" name="degree" value="severe" />Severe </td>
+                        <td><input type="radio" name="degree" value="unknown" />Unknown </td>
+                        <td><input type="radio" name="degree" value="other" />Other</td>
+                    </tr>
+                    <tr>
+                        <td>Degree at Present: </td>
+                        <td><input type="radio" name="degreePresent" value="none" />None</td>
+                        <td><input type="radio" name="degreePresent" value="minimal" />Minimal</td>
+                        <td><input type="radio" name="degreePresent" value="moderate" />Moderate </td>
+                        <td><input type="radio" name="degreePresent" value="severe" />Severe </td>
+                        <td><input type="radio" name="degreePresent" value="unknown" />Unknown </td>
+                        <td><input type="radio" name="degreePresent" value="other" />Other</td>
+                    </tr>
+                    <tr>
+                        <td>Risk Factors: </td>
+                        <td><input type="checkbox" name="risk" value="none" />None</td>
+                    </tr>
+                    <tr>
+                        <td>Therapy to Day: </td>
+                        <td><input type="checkbox" name="therapy" value="none" />None</td>
+                    </tr>
+                    <tr>
+                        <td>Associated Symptoms: </td>
+                        <td><input type="checkbox" name="symptoms" value="none" />None</td>
+                    </tr>
+                    <tr>
+                        <td>Associated Hx: </td>
+                        <td><input type="checkbox" name="hx" value="none" />None</td>
+                        <td><input type="checkbox" name="hx" value="suspectedAbuse" />Suspected Abuse</td>
+                        <td><input type="checkbox" name="hx" value="other" />Other</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Sexual History: </td>
+                        <td><input type="checkbox" name="sexualHistory" value="none" />None</td>
+                        <td><input type="checkbox" name="sexualHistory" value="non_contributory" />Non Contributory</td>
+                        <td><input type="checkbox" name="sexualHistory" value="unprotected" />Unprotected</td>
+                        <td><input type="checkbox" name="sexualHistory" value="multiple_partners" />Multiple Partners</td>
+                        <td><input type="checkbox" name="sexualHistory" value="barrier_contraception" />Barrier Contraception</td>
+                        <td><input type="checkbox" name="sexualHistory" value="std_exposure" />STD Exposure</td>
+                        <td><input type="checkbox" name="sexualHistory" value="birth_control" />Birth Control Pills</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="checkbox" name="sexualHistory" value="depo" />Depo</td>
+                        <td><input type="checkbox" name="sexualHistory" value="btl" />BTL</td>
+                        <td><input type="checkbox" name="sexualHistory" value="hysterectomy" />Hysterectomy</td>
+                        <td><input type="checkbox" name="sexualHistory" value="partner_sterile" />Partner Sterile</td>
+                        <td><input type="checkbox" name="sexualHistory" value="rectle_intercourse" />Rectle Intercourse</td>
+                        <td><input type="checkbox" name="sexualHistory" value="other" />Other</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Last Intake: </td>
+                        <td><input type="number" class="form-control" name="" placeholder="Insert Number"/></td>
+                        <td><input type="radio" name="lastIntake" value="minutes ago" /> min(s) ago <br></td>
+                        <td><input type="radio" name="lastIntake" value="hours ago" /> hour(s) ago <br></td>
+                        <td><input type="radio" name="lastIntake" value="days ago" /> day(s) ago <br></td>
+                        <td><input type="radio" name="lastIntake" value="unknown" />Unknown</td>
+                        <td><input type="radio" name="lastIntake" value="other" />Other</td>
+                    </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Review of Symptoms</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="200">
+                    <col span="50" width="550">
+               </colgroup>
+                   <tr>
+                       <td>Constitutional: </td>
+                       <td><input type="checkbox" name="constitutional" value="none" />Neg except HPI</td>
+                       <td><input type="checkbox" name="constitutional" value="fever" />Fever</td>
+                       <td><input type="checkbox" name="constitutional" value="chills" />Chills</td>
+                       <td><input type="checkbox" name="constitutional" value="sweats" />Sweats</td>
+                       <td><input type="checkbox" name="constitutional" value="weakness" />Weakness</td>
+                       <td><input type="checkbox" name="constitutional" value="fatigue" />Fatigue</td>
+                       <td><input type="checkbox" name="constitutional" value="decreased_activity" />Decreased Activity</td>
+                       <td><input type="checkbox" name="constitutional" value="mataise" />Mataise</td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td><input type="checkbox" name="constitutional" value="decreased_apetite" />Decreased Apetite</td>
+                       <td><input type="checkbox" name="constitutional" value="night_sweats" />Night Sweats</td>
+                       <td><input type="checkbox" name="constitutional" value="weight_gain" />Weight Gain</td>
+                       <td><input type="checkbox" name="constitutional" value="weight_loss" />Weight Loss</td>
+                       <td><input type="checkbox" name="constitutional" value="other" />Other</td>
+                   </tr>
+                   <tr>
+                       <td>Skin:</td>
+                   </tr>
+                   <tr>
+                       <td>Eyes:</td>
+                   </tr>
+                   <tr>
+                       <td>ENMT:</td>
+                   </tr>
+                   <tr>
+                       <td>Respiratory:</td>
+                   </tr>
+                   <tr>
+                       <td>Cardiovascular:</td>
+                   </tr>
+                   <tr>
+                       <td>Gastroenteritis:</td>
+                   </tr>
+                   <tr>
+                       <td>Genitourinary:</td>
+                   </tr>
+                   <tr>
+                       <td>Musculoskeletal:</td>
+                   </tr>
+                   <tr>
+                       <td>Neurologic:</td>
+                   </tr>
+                   <tr>
+                       <td>Psychiatric:</td>
+                   </tr>
+                   <tr>
+                       <td>Endocrinic:</td>
+                   </tr>
+                   <tr>
+                       <td>Heme/Lymph:</td>
+                   </tr>
+                   <tr>
+                       <td>Allegy/Ammunologic:</td>
+                   </tr>
+                   <tr>
+                       <td>Additional ROS info:</td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Past History</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="200">
+                    <col span="50" width="1000">
+               </colgroup>
+                   <tr>
+                       <td>Medical History: </td>
+                       <td><input type="text" class="form-control" name="medical" placeholder="Insert any medical history" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Surgical History: </td>
+                       <td><input type="text" class="form-control" name="surgical" placeholder="Insert any surgical history" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Social History: </td>
+                       <td><input type="text" class="form-control" name="social" placeholder="Insert any social history" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Family History: </td>
+                       <td><input type="text" class="form-control" name="family" placeholder="Insert any family history" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Medications: </td>
+                       <td><input type="text" class="form-control" name="medication" placeholder="Insert all medications" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Allergies: </td>
+                       <td><input type="text" class="form-control" name="allergies" placeholder="Insert any allergies" required/></td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Physical Examination</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="120">
+                    <col span="50" width="700">
+               </colgroup>
+                   <tr>
+                       <td>General: </td>
+                       <td><input type="text" class="form-control" name="general" placeholder="General Exams" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Skin: </td>
+                       <td><input type="text" class="form-control" name="skin" placeholder="Skin Exams" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Head: </td>
+                       <td><input type="text" class="form-control" name="head" placeholder="Head Exams" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Eyes: </td>
+                       <td><input type="text" class="form-control" name="eye" placeholder="Eye Exams" required/></td>
+                   </tr>
+                   <tr>
+                       <td>ENMT: </td>
+                       <td><input type="text" class="form-control" name="enmt" placeholder="ENMT" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Neck: </td>
+                       <td><input type="text" class="form-control" name="neck" placeholder="Neck" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Cardiovascular:</td>
+                       <td><input type="text" class="form-control" name="cardiovascular" placeholder="Cardiovascular Exams" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Abdominal:</td>
+                       <td><input type="text" class="form-control" name="abdominal" placeholder="Abdominal Exams" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Extremetis:</td>
+                       <td><input type="text" class="form-control" name="extremetis" placeholder="Extremetis" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Neurological:</td>
+                       <td><input type="text" class="form-control" name="neurological" placeholder="Neurological Exams" required/></td>
+                   </tr>
+                   <tr>
+                       <td>Psychiatric:</td>
+                       <td><input type="text" class="form-control" name="pyschiatric" placeholder="Psychiatric Exams" required/></td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Medical Desicion Making</b></center></h4>
+            <table>
+                <tr>
+                    <td>Labs:</td>
+                </tr>
+                <tr>
+                    <td>Imaging:</td>
+                </tr>
+                <tr>
+                    <td>EKG:</td>
+                </tr>
+                <tr>
+                    <td>COURSE/MDM:</td>
+                </tr>
+                <tr>
+                    <td>CONSULTS:</td>
+                </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div>
+            <h4><center><b>Diagnosis and Disposition</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="120">
+                    <col span="2" width="1000">
+               </colgroup>
+                   <tr>
+                       <td>Diagnosis: </td>
+                   </tr>
+                    <tr>
+                       <td>Disposition: </td>
+                       <td><input type="text" class="form-control" name="disposition" placeholder="" required/></td>
+                   </tr>
+                    <tr>
+                       <td>Discharge Instructions: </td>
+                       <td><input type="text" class="form-control" name="instructions" placeholder="" required/></td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        <center><input class="btn btn-primary" id="submit" type="submit" name="submitEMR" value="SUBMIT"></center><br>
+    </div>
+    </div>
+</div>

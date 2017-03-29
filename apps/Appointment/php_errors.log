@@ -17,3 +17,6 @@
 [15-Mar-2017 17:22:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Appointment/model/getAppointmentTimes.php:0
 [16-Mar-2017 01:35:59 UTC] PHP Fatal error:  Cannot use isset() on the result of a function call (you can use "null !== func()" instead) in /home/ubuntu/workspace/apps/Appointment/model/getDoctors.php on line 15
 [16-Mar-2017 01:36:29 UTC] PHP Fatal error:  Cannot use isset() on the result of a function call (you can use "null !== func()" instead) in /home/ubuntu/workspace/apps/Appointment/model/getDoctors.php on line 15
+[27-Mar-2017 18:25:42 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/apps/Appointment/view/scheduleAppointmentAction.phtml on line 11
+[27-Mar-2017 18:25:42 UTC] PHP Stack trace:
+[27-Mar-2017 18:25:42 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Appointment/view/scheduleAppointmentAction.phtml:0

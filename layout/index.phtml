@@ -79,23 +79,24 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav" id="myTab">
-                        <li class="active"><a href="<?php echo Utils::createLink('Main', 'list'); ?>">Home</a></li>
-                        <li><a href="<?php if($this->current_person->getRoleFK()->getRole() == 'Patient'){echo Utils::createLink('Person', 'patientProfile');} else {echo Utils::createLink('Person', 'doctorProfile');}?>">My Profile</a></li>
-                        <li><a href="<?php echo Utils::createLink('Messages', 'inboxView'); ?>">Inbox</a></li>
-                        <li><a href="<?php echo Utils::createLink('Appointment', 'scheduleAppointment'); ?>">Schedule Appointments</a></li>
-                        <!--<li><a href="services.html">Services</a></li>-->
-                        <!--<li><a href="portfolio.html">Portfolio</a></li>-->
-                        <!--<li class="dropdown">-->
-                        <!--    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down"></i></a>-->
-                        <!--    <ul class="dropdown-menu">-->
-                        <!--        <li><a href="blog-item.html">Blog Single</a></li>-->
-                        <!--        <li><a href="pricing.html">Pricing</a></li>-->
-                        <!--        <li><a href="404.html">404</a></li>-->
-                        <!--        <li><a href="shortcodes.html">Shortcodes</a></li>-->
-                        <!--    </ul>-->
-                        <!--</li>-->
-                        <!--<li><a href="blog.html">Blog</a></li> -->
-                        <!--<li><a href="contact-us.html">Contact</a></li>-->
+                        <li <?php if(($this->action == 'list') && ($this->controller == 'Main')) echo 'class="active"' ?>><a href="<?php echo Utils::createLink('Main', 'list'); ?>">Home</a></li>
+                        <li <?php if((($this->action == 'patientProfile') || ($this->action == 'doctorProfile')) && ($this->controller == 'Person')) echo 'class="active"' ?>><a href="<?php if($this->current_person->getRoleFK()->getRole() == 'Patient'){echo Utils::createLink('Person', 'patientProfile');} else {echo Utils::createLink('Person', 'doctorProfile');}?>">My Profile</a></li>
+                        <li <?php if(($this->action == 'inboxView') && ($this->controller == 'Messages')) echo 'class="active"' ?>><a href="<?php echo Utils::createLink('Messages', 'inboxView'); ?>">Inbox</a></li>
+                        <li class="dropdown <?php if($this->controller == 'Appointment') echo 'active' ?>">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Appointments <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <?php if($this->current_person->getRoleFK()->getRole() == "Patient"){ ?>
+                                    <li><a href="<?php echo Utils::createLink('Appointment', 'scheduleAppointment'); ?>">Schedule Appointment</a></li>
+                                    <li><a href="<?php echo Utils::createLink('Appointment', 'listAppointment'); ?>">View Appointments</a></li>
+                                <?php } else{ ?>
+                                    <li><a href="<?php echo Utils::createLink('Appointment', 'createAppointments'); ?>">Create Appointments</a></li>
+                                    <li><a href="<?php echo Utils::createLink('Appointment', 'listAppointment'); ?>">View Appointments</a></li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                        <?php if($this->current_person->getRoleFK()->getRole() != "Patient"){ ?>
+                        <li <?php if(($this->action == 'EMRView') && ($this->controller == 'EMR')) echo 'class="active"' ?>><a href="<?php echo Utils::createLink('EMR', 'EMRView'); ?>">EMR</a></li>
+                        <?php } ?>
                         <li><a href="<?php echo Utils::createLink('Person', 'logoutPerson'); ?>">Log Out</a></li>
                     </ul>
                 </div>

@@ -3,9 +3,12 @@
 final class Appointment extends BaseObject {
 
     protected $id;
-    protected  $date;
-    protected  $reason_for_visit;
+    protected $date;
+    protected $physician_fk;
+    protected $patient_fk;
+    protected $reason_for_visit;
     protected $explanation;
+    protected $appointment_record_fk;
     
     public function getAppointmentTimeFK() {
         if (is_numeric($this->appointment_time_fk)) {
@@ -33,10 +36,10 @@ final class Appointment extends BaseObject {
         $this->physician_fk = $physician_fk;
     }
     
-           public function getPatientFK() {
+    public function getPatientFK() {
         if (is_numeric($this->patient_fk)) {
-            $PatientMapper = new PersonMapper();
-            $this->patient_fk = $PatientMapper->FindBy(array('id' => $this->patient_fk));
+            $patientMapper = new PersonMapper();
+            $this->patient_fk = $patientMapper->FindBy(array('id' => $this->patient_fk));
         } elseif (empty($this->patient_fk))
             $this->patient_fk = new Person();
         return $this->patient_fk;
@@ -48,11 +51,12 @@ final class Appointment extends BaseObject {
 
 
  public function getAppointmentRecordFK() {
-        if (is_numeric($this->appointment_record_fk)) {
-            $AppointmentRecordMapper = new AppointmentRecord();
-            $this->appointment_record_fk = $AppointmentRecordMapper->FindBy(array('id' => $this->appointment_record_fk));
-        } elseif (empty($this->appointment_record_fk))
-            $this->appointment_record_fk = new AppointmentRecord();
+        // if (is_numeric($this->appointment_record_fk)) {
+        //     $AppointmentRecordMapper = new AppointmentRecord();
+        //     $this->appointment_record_fk = $AppointmentRecordMapper->FindBy(array('id' => $this->appointment_record_fk));
+        // } elseif (empty($this->appointment_record_fk))
+        //     $this->appointment_record_fk = new AppointmentRecord();
+        // return $this->appointment_record_fk;
         return $this->appointment_record_fk;
     }
 

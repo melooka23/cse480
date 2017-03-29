@@ -13,9 +13,17 @@ if($doctor_fk){
     $appointmentDates = $mapper->findAll();   
 }
 
+foreach ($appointmentDates as $key => $date){
+    $appointmentDate = strtotime($date->getDate());
+    $today = strtotime("today");
+    if(($appointmentDate - $today) < 0){
+        unset($appointmentDates[$key]);
+    }
+}
+
 foreach ($appointmentDates as $date) {
     if($date->getPatientFK()->getID() == null){
-        $items[$date->getDate()] = htmlentities($date->getID());
+        $items[date('l, F j, Y', strtotime($date->getDate()))] = htmlentities($date->getID());
     }
 }
 

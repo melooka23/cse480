@@ -14,6 +14,10 @@ final class AppointmentController extends BaseController {
         self::getSubController();
     }
     
+    public function listAppointmentAction() {
+        self::getSubController();
+    }
+    
 }
 
 ?>

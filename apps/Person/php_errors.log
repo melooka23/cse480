@@ -93,3 +93,9 @@
 [14-Feb-2017 15:46:51 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/apps/Person/view/patientProfileAction.phtml on line 25
 [14-Feb-2017 15:46:51 UTC] PHP Stack trace:
 [14-Feb-2017 15:46:51 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/patientProfileAction.phtml:0
+[20-Mar-2017 17:30:49 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/apps/Person/view/doctorProfileAction.phtml on line 23
+[20-Mar-2017 17:30:49 UTC] PHP Stack trace:
+[20-Mar-2017 17:30:49 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/doctorProfileAction.phtml:0
+[20-Mar-2017 17:30:54 UTC] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/apps/Person/view/doctorProfileAction.phtml on line 23
+[20-Mar-2017 17:30:54 UTC] PHP Stack trace:
+[20-Mar-2017 17:30:54 UTC] PHP   1. {main}() /home/ubuntu/workspace/apps/Person/view/doctorProfileAction.phtml:0

@@ -32,6 +32,9 @@ final class PersonController extends BaseController {
      public function scheduleAppointmentAction() {
         self::getSubController();
     }
+    public function emrViewAction() {
+        self::getSubController();
+    }
     
 }
 

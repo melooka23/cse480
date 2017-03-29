@@ -1,0 +1,16 @@
+<div class="container">
+
+<form id="listAppointments" action="#" method="post">
+    <br>
+    <div class="form-group">
+    <?php
+    $tablefield = new FieldTable();
+    $tablefield->setClass('col-lg-8');
+    $tablefield->setID('myTable');
+    $tablefield->setLabel("My Upcoming Appointments");
+    $tablefield->setValue($mylist);
+    $tablefield->ShowField();
+    ?>
+    </div>
+</form>
+</div>

@@ -4,14 +4,44 @@
         <h2 class="section-heading">Open New <span>Appointments</span></h2><hr>
       </div>  
       <form class="form-horizontal" method='post' role="form" data-parsley-validate="" id="createappointmentsection" action="#">
-<br>
-          <h4><center><b>Select a date, and which appointment times you would like to open to patients</b></center></h4><br>
+        
+        <br>
+          <h4>
+              <center>
+                  <b>Select a date, and which appointment times you would like to open to patients</b>
+                  </center>
+            </h4>
+            
+            <br>
+            
             <div class="row">    
-              
               <div class="col-sm-4" style="margin:0px 430px;" align="middle">
                 <div class="form-group">
-                  <label><center>Appointment Date:</center></label>
-                  <input type="date" class="form-control date-pick" id="appointmentdate" placeholder="Appointment Date" required>
+                    <label>
+                        <center>Appointment Date:</center>
+                    </label>
+              <table>
+                  <thead></thead>
+                  <tbody>
+                      <tr>
+                          <td valign="top">
+                              
+                  <input type="date" class="form-control date-pick" id="appointment_date" name="appointment_date" placeholder="Appointment Date" 
+                  value="<?php
+                                 echo $appointment_date;
+                            ?>" required>
+                            
+                            <input type=hidden name="selected_date" value="<?php
+                                  echo $appointment_date;
+                            ?>">
+                          </td>
+                          <td valign="top">
+                              <input style="margin-top:0;" class="btn btn-primary" id="submit" type="submit" name="goto" value="GO TO">
+                          </td>
+                      </tr>
+                  </tbody>
+
+              </table>
                 </div>
               </div>
               
@@ -20,23 +50,35 @@
                 <div class="form-group">
                     <center>
                         <div class="col-sm-4" style="margin:0px 430px;" align="center">
-  <label>Appointment Times:</label>
+  <label>Appointment Times for <?php if($appointment_date){
+                                  echo date('m/d/Y', strtotime($appointment_date));
+                                  }
+                            ?>:</label>
   <table class="table table-hover" id="medicationsTable">
             <thead>
                 <tr>
-                    <th><input name="chk-all[]" type="checkbox"></th>
+                    <th><input name="chk-all[]" id="chk-all" type="checkbox"></th>
                     <th>Time</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($times as $time) { ?>
+                <?php foreach ($possible_times as $possible_time) { ?>
                     <tr>
                         <td>
-                            <input name="chk[]" type="checkbox">
-                            <input type="hidden" name="timeIDs[]" value='<?php echo $time->getID(); ?>'>
+                            <input name="<?php echo 'chk[' . $possible_time->getID() . ']'; ?>" 
+                            type="checkbox"
+                            <?php if (isset($selected_times)) {
+                                    foreach ($selected_times as $selectd_time) {
+                                        if ($selectd_time->getAppointmentTimeFK()->getID() == $possible_time->getId()) {
+                                            echo "checked";
+                                        }
+                                    }
+                                }
+                            ?>
+                            >
                         </td>
                         <td>
-                            <?php echo $time->getTime(); ?>
+                            <?php echo $possible_time->getTime(); ?>
                         </td>
                         
                     </tr>
@@ -47,6 +89,12 @@
               
               </center>
             </div>
-            <center><button id="submit" type="submit" name="submit">Book Appointment</button></center><br>
+            <center><input class="btn btn-primary" id="submit" type="submit" name="createAppointment" value="Save Available Appointments"></center><br>
           </form>
     </div>
+    
+    <script>
+    $("#chk-all").change(function () {
+        $('input[name^=chk]').prop('checked', $(this).prop("checked"));
+    });
+    </script>
