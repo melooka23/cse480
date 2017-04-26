@@ -1,0 +1,124 @@
+<div class="container">
+
+  
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+            <div class="btn-group">
+              
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-10">
+            <!-- Split button -->
+            <div class="btn-group">
+        
+            </div>
+          
+            <!-- Single button -->
+            <div class="btn-group">
+               
+            </div>
+            <div class="pull-right">
+                <span class="text-muted"></span>
+                <div class="btn-group btn-group-sm">
+              
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+            <div data-toggle="modal" data-target="#modalReply">
+      <a id="open" href="#modalReply" rel="modal:open" class="btn btn-danger btn-sm btn-block" role="button">REPLY</a>
+      </div>
+            <hr>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="<?php echo Utils::createLink('Messages', 'inboxView');?>">Inbox</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-md-10">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+            </ul>
+
+<div class="col-sm-12">
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2">To</label>
+                  <div class="col-sm-10"><?php echo $this->thismessage->getRecipientFK()->getFullName(); ?></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2">From</label>
+                  <div class="col-sm-10"><?php echo $this->thismessage->getSenderFK()->getFullName(); ?></div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-2" for="inputSubject">Subject</label>
+                  <div class="col-sm-10"><?php echo $this->thismessage->getSubject(); ?></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-12" for="inputBody">Message</label>
+                  <div class="col-sm-12"><textarea class="form-control" disabled id="inputBody" rows="18"><?php echo $this->thismessage->getMessage(); ?></textarea></div>
+                </div>
+                <br><br><br><br>
+            </form>
+  </div>
+
+  
+  
+  
+  <!-- modalfor reply messag -->
+    <div class="modal fade" id="modalReply">
+        
+  <form method="post" role="form" id="inboxOpen" action="#">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            
+          <div class="modal-header">
+            <button type="button" class="close hide-modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="document.getElementById('id01').style.display='none'" 
+        class="closebtn">&times;</span></button>
+            <h4 class="modal-title">Reply To Message</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2" for="inputTo">To</label>
+                  <div class="col-sm-10"><?php echo $this->thismessage->getSenderFK()->getFullName(); ?></div>
+                </div>
+                
+                <br>
+                <div class="form-group">
+                  <label class="col-sm-2" for="inputSubject">Subject</label>
+                  <div class="col-sm-10"><input class="form-control" name="message[subject]" id="inputSubject" value="<?php echo 'RE: ' . $this->thismessage->getSubject(); ?>" type="text" required></div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-12" for="inputBody">Message</label>
+                  <div class="col-sm-12"><textarea class="form-control" name="message[message]" id="inputBody" rows="18" required></textarea></div>
+                </div>
+                
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button> 
+            <input type="submit" class="btn btn-primary " name="send_message" value="Send Message"></input>
+            
+          </div>
+          
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+      </form>
+    </div><!-- /.modal compose message -->
+  
+  
+</div>
+<script>
+$(document).ready(function(){
+  $('.hide-modal').click(function(){
+    $('modalReply').modal('hide');
+  }); 
+});
+</script>
+
+</div>

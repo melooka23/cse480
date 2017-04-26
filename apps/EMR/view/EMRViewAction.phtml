@@ -1,66 +1,603 @@
 <div class= "container">
+    
+    <form method= "post" role="form" id="EMRView" action="#">
+    
+    <?php
+    $hpiField = new FieldEMR();
+    $hpiField->setStyle('color:black');
+    ?>
+    <?php
+    $rosField = new FieldEMR();
+    $rosField->setStyle('color:black');
+    ?>
     <div class="section text-center">
+        <div style="border-bottom: solid; border-color: red;">
         <h2 class="section-heading">Electronic Medical Record System</span></h2>
         <hr>
      </div>
-     <form class="form-horizontal" method='post' role="form" data-parsley-validate="" id="emr" action="#">
+     
+     <div id= "alert" class="alert alert-info alert-dismissable">
+          <a class="close" data-dismiss="alert" onclick="document.getElementById('alert').style.display='none'">&times;</a> 
+          <i class="fa fa-coffee hide-modal"></i>
+          Click once to indicate present (<span style="color:green">green</span>). Click twice to indicate not present (<span style="color:red">red</span>). Click thrice to indicate not applicable (<span style="color:black">black</span>).
+        </div>
+        
+     <form class="form-inline" method='post' role="form" data-parsley-validate="" id="emr" action="#">
      <div class="row">
         <div class="form-group">
-         <div style="border-bottom: solid; border-color: red;">
-         <h4><center><b>History of Present Illnesses</b></center></h4>
-            <table>
+            <div class="table" style="border-bottom: solid; border-color: red;">
+                <table class="table">
                 <colgroup>
                     <col span="1" width="140">
-                    <col span="50" width="590">
+                    <col span="1" width="200">
+                    <col span="1" width="250">
+                    <col span="6" width="160">
+               </colgroup>
+               <tr>
+             <h4><center><b>Patient Information</b></center></h4>
+             <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Patient First Name</label>
+                  <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $patient->getPersonFK()->getFirstName(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Patient Last Name</label>
+                  <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $patient->getPersonFK()->getLastName(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Date of Birth</label>
+                  <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="<?php echo $patient->getDateOfBirth(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Appointment Date</label>
+                  <input type="text" class="form-control" id="gender"  value="<?php echo $appointment_for_record->getDate(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Appointment Time</label>
+                  <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $appointment_for_record->getAppointmentTimeFK()->getTime(); ?>" readonly>
+                </div>
+              </div>
+              </tr>
+              </table>
+            </div>
+             
+             
+         <div class="table" style="border-bottom: solid; border-color: red;">
+         <h4><center><b>History of Present Illnesses</b></center></h4>
+            <table class="table">
+                <colgroup>
+                    <col span="1" width="140">
+                    <col span="1" width="200">
+                    <col span="1" width="250">
+                    <col span="6" width="160">
                </colgroup>
                     <tr>
                         <td>Presents with: </td>
-                        <td>
-                            <input type="text" class="form-control" id="complaint" name="complaint" placeholder="chief complaint" required/>
+                        <td colspan="8">
+                            <input type="text" class="form-control" id="complaint" name="chief_complaint" placeholder="chief complaint" size="100" required/>
                         </td>
+                        
                     </tr>
                     <tr>
                         <td>Onset: </td>
                         <td>
-                            <input type="number" class="form-control" name="" placeholder="Insert Number" required/>
+                            <input type="number" class="form-control" name="hpi_onset_number" placeholder="Insert Number" />
                         </td>
-                        <td><input type="radio" name="time" value="minutes ago" /> mins ago <br></td>
-                        <td><input type="radio" name="time" value="hours ago" /> hours ago <br></td>
-                        <td><input type="radio" name="time" value="days ago" /> days ago <br></td>
-                        <td><input type="radio" name="time" value="weeks ago" /> weeks ago <br></td>
-                        <td><input type="radio" name="time" value="chonic" /> chronic <br></td>
-                        <td><input type="radio" name="time" value="unknown" /> unknown <br></td>
-                        <td><input type="radio" name="time" value="other" /> other <br></td>
+                        <td><input type="radio" name="hpi_onset" value="minutes ago" /> mins ago <br></td>
+                        <td><input type="radio" name="hpi_onset" value="hours ago" /> hours ago <br></td>
+                        <td><input type="radio" name="hpi_onset" value="days ago" /> days ago <br></td>
+                        <td><input type="radio" name="hpi_onset" value="weeks ago" /> weeks ago <br></td>
+                        <td><input type="radio" name="hpi_onset" value="chonic" /> chronic <br></td>
+                        <td><input type="radio" name="hpi_onset" value="unknown" /> unknown <br></td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>Course/Duration: <br></td>
-                        <td><input type="checkbox" name="duration" value="constant" /> Constant <br></td>
-                        <td><input type="checkbox" name="duration" value="improving" /> Improving <br></td>
-                        <td><input type="checkbox" name="duration" value="resolved" /> Resolved <br></td>
-                        <td><input type="checkbox" name="duration" value="worsening" /> Worsening<br></td>
-                        <td><input type="checkbox" name="duration" value="episodes" /> Episodes <br></td>
-                        <td><input type="checkbox" name="duration" value="fluctuatingintensity" /> Fluctuating Intensity <br></td>
-                        <td><input type="checkbox" name="duration" value="unknown" /> unknown <br></td>
-                        <td><input type="checkbox" name="duration" value="other" /> other <br></td>
-                    </tr>
+                        <td>Duration: <br></td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[duration][constant]');
+                            $hpiField->setId('constant');
+                            $hpiField->setValue('Constant');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[duration][improving]');
+                            $hpiField->setId('improving');
+                            $hpiField->setValue('Improving');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[duration][resolved]');
+                            $hpiField->setId('resolved');
+                            $hpiField->setValue('Resolved');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[duration][worsening]');
+                            $hpiField->setId('worsening');
+                            $hpiField->setValue('Worsening');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[duration][fluctuating intensity]');
+                            $hpiField->setId('fluctuating_intensity');
+                            $hpiField->setValue('Fluctuating Intensity');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[duration][unknown]');
+                            $hpiField->setId('unknown');
+                            $hpiField->setValue('Unknown');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
                     <tr>
                         <td>Location: </td>
-                        <td><input type="checkbox" name="location" value="genealized" />Genealized </td>
-                    </tr>
-                    <tr>
-                        <td>Character: </td>
-                        <td><input type="checkbox" name="character" value="pain" />Pain </td>
-                        <td><input type="checkbox" name="character" value="swelling" />Swelling </td>
-                        <td><input type="checkbox" name="character" value="tingling" />Tingling </td>
-                        <td><input type="checkbox" name="character" value="numbness" />Numbness </td>
-                        <td><input type="checkbox" name="character" value="bleeding" />Bleeding</td>
-                        <td><input type="checkbox" name="character" value="redness" />Redness </td>
-                        <td><input type="checkbox" name="character" value="lossOfMobility" />Loss of Mobility<br> </td>
-                        <td><input type="checkbox" name="character" value="unknown" />Unknown </td>
+                         <td>
+                            <?php
+                            $hpiField->setName('hpi[location][generalized]');
+                            $hpiField->setId('generalized');
+                            $hpiField->setValue('Generalized');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][right]');
+                            $hpiField->setId('r');
+                            $hpiField->setValue('R');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][left]');
+                            $hpiField->setId('l');
+                            $hpiField->setValue('L');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][bilateral]');
+                            $hpiField->setId('bi');
+                            $hpiField->setValue('BI');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][anterior]');
+                            $hpiField->setId('ant');
+                            $hpiField->setValue('ANT');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][posterior]');
+                            $hpiField->setId('post');
+                            $hpiField->setValue('Post');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][medial]');
+                            $hpiField->setId('medial');
+                            $hpiField->setValue('Medial');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][lateral]');
+                            $hpiField->setId('lateral');
+                            $hpiField->setValue('Lateral');
+                            $hpiField->showField();
+                           ?>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="checkbox" name="character" value="other" />Other </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][superior]');
+                            $hpiField->setId('sup');
+                            $hpiField->setValue('Sup');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][inferior]');
+                            $hpiField->setId('inf');
+                            $hpiField->setValue('Inf');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][upper]');
+                            $hpiField->setId('upper');
+                            $hpiField->setValue('Upper');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][lower]');
+                            $hpiField->setId('lower');
+                            $hpiField->setValue('Lower');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][plantar]');
+                            $hpiField->setId('plantar');
+                            $hpiField->setValue('Plantar');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][dorsal]');
+                            $hpiField->setId('dorsal');
+                            $hpiField->setValue('Dorsal');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][palmar]');
+                            $hpiField->setId('palmar');
+                            $hpiField->setValue('Palmar');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][midline]');
+                            $hpiField->setId('midline');
+                            $hpiField->setValue('Midline');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][scalp]');
+                            $hpiField->setId('scalp');
+                            $hpiField->setValue('Scalp');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][face]');
+                            $hpiField->setId('face');
+                            $hpiField->setValue('Face');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][eye]');
+                            $hpiField->setId('eye');
+                            $hpiField->setValue('Eye(s)');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][neck]');
+                            $hpiField->setId('neck');
+                            $hpiField->setValue('Neck');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][chest]');
+                            $hpiField->setId('chest');
+                            $hpiField->setValue('Chest');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][trunk]');
+                            $hpiField->setId('trunk');
+                            $hpiField->setValue('Trunk');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][abdominon]');
+                            $hpiField->setId('abdominon');
+                            $hpiField->setValue('Abdominan');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][flank]');
+                            $hpiField->setId('flank');
+                            $hpiField->setValue('Flank');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][groin]');
+                            $hpiField->setId('groin');
+                            $hpiField->setValue('Groim');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][prenium]');
+                            $hpiField->setId('prenium');
+                            $hpiField->setValue('Prenium');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][back]');
+                            $hpiField->setId('back');
+                            $hpiField->setValue('Back');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][buttock]');
+                            $hpiField->setId('buttock');
+                            $hpiField->setValue('Buttock');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][upper extremity]');
+                            $hpiField->setId('ue');
+                            $hpiField->setValue('UE');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][shoulder]');
+                            $hpiField->setId('shoulder');
+                            $hpiField->setValue('Shoulder');
+                            $hpiField->showField();
+                           ?>
+                        </td><td>
+                            <?php
+                            $hpiField->setName('hpi[location][axilla]');
+                            $hpiField->setId('axilla');
+                            $hpiField->setValue('Axilla');
+                            $hpiField->showField();
+                           ?>
+                        </td><td>
+                            <?php
+                            $hpiField->setName('hpi[location][arm]');
+                            $hpiField->setId('arm');
+                            $hpiField->setValue('Arm');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][elbow]');
+                            $hpiField->setId('elbow');
+                            $hpiField->setValue('Elbow');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][forearm]');
+                            $hpiField->setId('forearm');
+                            $hpiField->setValue('Forearm');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][wrist]');
+                            $hpiField->setId('wrist');
+                            $hpiField->setValue('Wrist');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][hand]');
+                            $hpiField->setId('Hand');
+                            $hpiField->setValue('Hand');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][fingers]');
+                            $hpiField->setId('fingers');
+                            $hpiField->setValue('Fingers');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][lower extremity]');
+                            $hpiField->setId('le');
+                            $hpiField->setValue('LE');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][hip]');
+                            $hpiField->setId('hip');
+                            $hpiField->setValue('Hip');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][thigh]');
+                            $hpiField->setId('thigh');
+                            $hpiField->setValue('Thigh');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][knee]');
+                            $hpiField->setId('knee');
+                            $hpiField->setValue('Knee');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][leg]');
+                            $hpiField->setId('leg');
+                            $hpiField->setValue('Leg(s)');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][ankle]');
+                            $hpiField->setId('ankle');
+                            $hpiField->setValue('Ankle');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][foot]');
+                            $hpiField->setId('foot');
+                            $hpiField->setValue('Foot');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[location][toes]');
+                            $hpiField->setId('toes');
+                            $hpiField->setValue('Toes');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Character: </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[character][pain]');
+                            $hpiField->setId('pain');
+                            $hpiField->setValue('Pain');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[character][swelling]');
+                            $hpiField->setId('swelling');
+                            $hpiField->setValue('Swelling');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[character][tingling]');
+                            $hpiField->setId('tingling');
+                            $hpiField->setValue('Tingling');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[character][numbness]');
+                            $hpiField->setId('numbness');
+                            $hpiField->setValue('Numbenss');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[character][redness]');
+                            $hpiField->setId('redness');
+                            $hpiField->setValue('Redness');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[character][bleeding]');
+                            $hpiField->setId('bleeding');
+                            $hpiField->setValue('Bleeding');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[character][loss_of_mobility]');
+                            $hpiField->setId('loss_of_mobility');
+                            $hpiField->setValue('Loss Of Mobility');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[character][unknown]');
+                            $hpiField->setId('character_unknown');
+                            $hpiField->setValue('Unknown');
+                            $hpiField->showField();
+                           ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Degree at Onset: </td>
@@ -69,6 +606,9 @@
                         <td><input type="radio" name="degree" value="severe" />Severe </td>
                         <td><input type="radio" name="degree" value="unknown" />Unknown </td>
                         <td><input type="radio" name="degree" value="other" />Other</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Degree at Present: </td>
@@ -78,126 +618,2583 @@
                         <td><input type="radio" name="degreePresent" value="severe" />Severe </td>
                         <td><input type="radio" name="degreePresent" value="unknown" />Unknown </td>
                         <td><input type="radio" name="degreePresent" value="other" />Other</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Risk Factors: </td>
-                        <td><input type="checkbox" name="risk" value="none" />None</td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][none]');
+                            $hpiField->setId('none');
+                            $hpiField->setValue('None');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][CAD]');
+                            $hpiField->setId('cad');
+                            $hpiField->setValue('CAD');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][HTN]');
+                            $hpiField->setId('htn');
+                            $hpiField->setValue('HTN');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][DM]');
+                            $hpiField->setId('dm');
+                            $hpiField->setValue('DM');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][smoking]');
+                            $hpiField->setId('smoking');
+                            $hpiField->setValue('Smoking');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][obesity]');
+                            $hpiField->setId('obesity');
+                            $hpiField->setValue('Obesity');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][family_history]');
+                            $hpiField->setId('family_history');
+                            $hpiField->setValue('Family History');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][recent_surgery]');
+                            $hpiField->setId('recent_surgery');
+                            $hpiField->setValue('Recent Surgery');
+                            $hpiField->showField();
+                           ?>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Therapy to Day: </td>
-                        <td><input type="checkbox" name="therapy" value="none" />None</td>
+                        <td></td>
+                       <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][pregnancy]');
+                            $hpiField->setId('pregnancy');
+                            $hpiField->setValue('Pregnanacy');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][age]');
+                            $hpiField->setId('age');
+                            $hpiField->setValue('Age');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][recent travel]');
+                            $hpiField->setId('recent_travel');
+                            $hpiField->setValue('Recent Travel');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][DVT]');
+                            $hpiField->setId('dvt');
+                            $hpiField->setValue('DVT');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][PE]');
+                            $hpiField->setId('pe');
+                            $hpiField->setValue('PE');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][asthma]');
+                            $hpiField->setId('asthma');
+                            $hpiField->setValue('Asthma');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][recent antibiotic use]');
+                            $hpiField->setId('recent_antibiotic_use');
+                            $hpiField->setValue('Recent Antibiotic Use');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][recent chemotherapy]');
+                            $hpiField->setId('recent_chemotherapy');
+                            $hpiField->setValue('Recent Chemotherapy');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][immunocompromised]');
+                            $hpiField->setId('immunocompromised');
+                            $hpiField->setValue('Immunocompromised');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][recent medication change]');
+                            $hpiField->setId('recent_medication_change');
+                            $hpiField->setValue('Recent Medication Change');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][recent hospitalization]');
+                            $hpiField->setId('recent_hospitalization');
+                            $hpiField->setValue('Recent Hospitalization');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][ETOH abuse]');
+                            $hpiField->setId('etoh_abuse');
+                            $hpiField->setValue('ETOH Abuse');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][drug abuse]');
+                            $hpiField->setId('drug_abuse');
+                            $hpiField->setValue('Drug Abuse');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][injury]');
+                            $hpiField->setId('injury');
+                            $hpiField->setValue('Injury');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][multiple_medication]');
+                            $hpiField->setId('multiple_medication');
+                            $hpiField->setValue('Multiple Medications');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][GI Bleed]');
+                            $hpiField->setId('gi_bleed');
+                            $hpiField->setValue('GI Bleed');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][nursing home resident]');
+                            $hpiField->setId('nursing_home_resident');
+                            $hpiField->setValue('Nursing Home Resident');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][change in diet]');
+                            $hpiField->setId('change_in_diet');
+                            $hpiField->setValue('Change in Diet');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][change in activity]');
+                            $hpiField->setId('change_in_activity');
+                            $hpiField->setValue('Change in Activity');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][non compliance]');
+                            $hpiField->setId('non_compliance');
+                            $hpiField->setValue('Non-compliance');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[risk factors][MRSA]');
+                            $hpiField->setId('mrsa');
+                            $hpiField->setValue('MRSA+');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Therapy today: </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][none]');
+                            $hpiField->setId('therapy_today_none');
+                            $hpiField->setValue('None');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][otc meds]');
+                            $hpiField->setId('otc_meds');
+                            $hpiField->setValue('OTC meds');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][rx meds]');
+                            $hpiField->setId('rx_meds');
+                            $hpiField->setValue('Rx Meds');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][local therapy]');
+                            $hpiField->setId('local_therapy');
+                            $hpiField->setValue('Local Therapy');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][dr office visit]');
+                            $hpiField->setId('drs_office_visit');
+                            $hpiField->setValue('Drs. Office Visit');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][ems]');
+                            $hpiField->setId('ems');
+                            $hpiField->setValue('EMS');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][see nurse notes]');
+                            $hpiField->setId('see_nurse_notes');
+                            $hpiField->setValue('See Nurse Notes');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][transferred from another facility]');
+                            $hpiField->setId('transferred_from_another_facility');
+                            $hpiField->setValue('Transferred from Another Facility');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                        <?php
+                            $hpiField->setName('hpi[therapy today][transferred from nursing home]');
+                            $hpiField->setId('transferred_from_nursing_home');
+                            $hpiField->setValue('Transferred from Nursing Home');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                            $hpiField->setName('hpi[therapy today][EMS forms reviewed]');
+                            $hpiField->setId('ems_forms_reviewed');
+                            $hpiField->setValue('EMS Forms Reviewed');
+                            $hpiField->showField();
+                           ?> 
+                        </td>
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[therapy today][transfer forms reviewed]');
+                            $hpiField->setId('transfer_forms_reviewed');
+                            $hpiField->setValue('Tranfer Forms Reviewed');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                        <td>
+                        </td><td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Associated Symptoms: </td>
-                        <td><input type="checkbox" name="symptoms" value="none" />None</td>
-                    </tr>
-                    <tr>
-                        <td>Associated Hx: </td>
-                        <td><input type="checkbox" name="hx" value="none" />None</td>
-                        <td><input type="checkbox" name="hx" value="suspectedAbuse" />Suspected Abuse</td>
-                        <td><input type="checkbox" name="hx" value="other" />Other</td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][none]');
+                            $hpiField->setId('sym_none');
+                            $hpiField->setValue('None');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][chest pain]');
+                            $hpiField->setId('chest_pain');
+                            $hpiField->setValue('Chest Pain');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][abdominal pain]');
+                            $hpiField->setId('abdominal_pain');
+                            $hpiField->setValue('Abdominal Pain');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][nausea]');
+                            $hpiField->setId('nausea');
+                            $hpiField->setValue('Nausea');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][diaphoresis]');
+                            $hpiField->setId('diaphoresis');
+                            $hpiField->setValue('Diaphoresis');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][vomiting]');
+                            $hpiField->setId('vomiting');
+                            $hpiField->setValue('Vomiting');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][shortness of breath]');
+                            $hpiField->setId('shortness_of_breath');
+                            $hpiField->setValue('Shortness of Breath');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][cough]');
+                            $hpiField->setId('cough');
+                            $hpiField->setValue('Cough');
+                            $hpiField->showField();
+                           ?>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Sexual History: </td>
-                        <td><input type="checkbox" name="sexualHistory" value="none" />None</td>
-                        <td><input type="checkbox" name="sexualHistory" value="non_contributory" />Non Contributory</td>
-                        <td><input type="checkbox" name="sexualHistory" value="unprotected" />Unprotected</td>
-                        <td><input type="checkbox" name="sexualHistory" value="multiple_partners" />Multiple Partners</td>
-                        <td><input type="checkbox" name="sexualHistory" value="barrier_contraception" />Barrier Contraception</td>
-                        <td><input type="checkbox" name="sexualHistory" value="std_exposure" />STD Exposure</td>
-                        <td><input type="checkbox" name="sexualHistory" value="birth_control" />Birth Control Pills</td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][fever]');
+                            $hpiField->setId('fever');
+                            $hpiField->setValue('Fever');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][chills]');
+                            $hpiField->setId('chills');
+                            $hpiField->setValue('Chills');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][fatigue]');
+                            $hpiField->setId('fatigue');
+                            $hpiField->setValue('Fatigue');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][headache]');
+                            $hpiField->setId('headache');
+                            $hpiField->setValue('Headache');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][anxiety]');
+                            $hpiField->setId('anxiety');
+                            $hpiField->setValue('Anxiety');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][dizziness]');
+                            $hpiField->setId('dizziness');
+                            $hpiField->setValue('Dizziness');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][neck pain]');
+                            $hpiField->setId('neck_pain');
+                            $hpiField->setValue('Neck Pain');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][back pain]');
+                            $hpiField->setId('back_pain');
+                            $hpiField->setValue('Back Pain');
+                            $hpiField->showField();
+                           ?>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="checkbox" name="sexualHistory" value="depo" />Depo</td>
-                        <td><input type="checkbox" name="sexualHistory" value="btl" />BTL</td>
-                        <td><input type="checkbox" name="sexualHistory" value="hysterectomy" />Hysterectomy</td>
-                        <td><input type="checkbox" name="sexualHistory" value="partner_sterile" />Partner Sterile</td>
-                        <td><input type="checkbox" name="sexualHistory" value="rectle_intercourse" />Rectle Intercourse</td>
-                        <td><input type="checkbox" name="sexualHistory" value="other" />Other</td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][altered vision]');
+                            $hpiField->setId('altered_vision');
+                            $hpiField->setValue('Altered Vision');
+                            $hpiField->showField();
+                           ?>
+                        </td>  
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][altered speech]');
+                            $hpiField->setId('altered_speech');
+                            $hpiField->setValue('Altered Speech');
+                            $hpiField->showField();
+                           ?>
+                        </td>  
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][altered coordination]');
+                            $hpiField->setId('altered_coordination');
+                            $hpiField->setValue('Altered Coordination');
+                            $hpiField->showField();
+                           ?>
+                        </td>  
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][focal weakness]');
+                            $hpiField->setId('focal_weakness');
+                            $hpiField->setValue('Focal Weakness');
+                            $hpiField->showField();
+                           ?>
+                        </td>  
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][altered sensation]');
+                            $hpiField->setId('altered_sensation');
+                            $hpiField->setValue('Altered Sensation');
+                            $hpiField->showField();
+                           ?>
+                        </td>  
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][confusion]');
+                            $hpiField->setId('confusion');
+                            $hpiField->setValue('Confusion');
+                            $hpiField->showField();
+                           ?>
+                        </td>  
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][lethargy]');
+                            $hpiField->setId('lethargy');
+                            $hpiField->setValue('Lethargy');
+                            $hpiField->showField();
+                           ?>
+                        </td>  
+                        <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][syncope]');
+                            $hpiField->setId('syncope');
+                            $hpiField->setValue('Syncope');
+                            $hpiField->showField();
+                           ?>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Last Intake: </td>
-                        <td><input type="number" class="form-control" name="" placeholder="Insert Number"/></td>
-                        <td><input type="radio" name="lastIntake" value="minutes ago" /> min(s) ago <br></td>
-                        <td><input type="radio" name="lastIntake" value="hours ago" /> hour(s) ago <br></td>
-                        <td><input type="radio" name="lastIntake" value="days ago" /> day(s) ago <br></td>
-                        <td><input type="radio" name="lastIntake" value="unknown" />Unknown</td>
-                        <td><input type="radio" name="lastIntake" value="other" />Other</td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][suspected foreign body]');
+                            $hpiField->setId('suspected_fb');
+                            $hpiField->setValue('Suspected FB');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][palpitations]');
+                            $hpiField->setId('palpitations');
+                            $hpiField->setValue('Palpitations');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][weight gain]');
+                            $hpiField->setId('weight_gain');
+                            $hpiField->setValue('Weight Gain');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][hemoptysis]');
+                            $hpiField->setId('hemoptysis');
+                            $hpiField->setValue('Hemoptysis');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][dysuria]');
+                            $hpiField->setId('dysuria');
+                            $hpiField->setValue('Dysuria');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][diarrhea]');
+                            $hpiField->setId('diarrhea');
+                            $hpiField->setValue('Diarrhia');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td>
+                            <?php
+                            $hpiField->setName('hpi[associated symptoms][blood in stool]');
+                            $hpiField->setId('blood_in_stool');
+                            $hpiField->setValue('Blood in Stool');
+                            $hpiField->showField();
+                           ?>
+                        </td>
+                          <td></td>
                     </tr>
+                    <tr>
+                        <td>Other Notes: </td>
+                        <td colspan="8">
+                            <input type="text" class="form-control" id="complaint" name="other_hpi_notes" placeholder="Write any other notes here" size="100" />
+                        </td>
+                        
+                    </tr>
+                    
             </table>
             <br>
         </div>
+        
+        
+        
         <br>
         <div style="border-bottom: solid; border-color: red;">
             <h4><center><b>Review of Symptoms</b></center></h4>
             <table>
                  <colgroup>
                     <col span="1" width="200">
-                    <col span="50" width="550">
+                    <col span="8" width="550">
                </colgroup>
                    <tr>
                        <td>Constitutional: </td>
-                       <td><input type="checkbox" name="constitutional" value="none" />Neg except HPI</td>
-                       <td><input type="checkbox" name="constitutional" value="fever" />Fever</td>
-                       <td><input type="checkbox" name="constitutional" value="chills" />Chills</td>
-                       <td><input type="checkbox" name="constitutional" value="sweats" />Sweats</td>
-                       <td><input type="checkbox" name="constitutional" value="weakness" />Weakness</td>
-                       <td><input type="checkbox" name="constitutional" value="fatigue" />Fatigue</td>
-                       <td><input type="checkbox" name="constitutional" value="decreased_activity" />Decreased Activity</td>
-                       <td><input type="checkbox" name="constitutional" value="mataise" />Mataise</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][negative except HPI]');
+                           $rosField->setId('neg_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][fever]');
+                           $rosField->setId('cons_fever');
+                           $rosField->setValue('Fever');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][chills]');
+                           $rosField->setId('cons_chills');
+                           $rosField->setValue('Chills');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][cons sweats]');
+                           $rosField->setId('cons_sweats');
+                           $rosField->setValue('Sweats');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][weakness]');
+                           $rosField->setId('weakness');
+                           $rosField->setValue('Weakness');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][fatigue]');
+                           $rosField->setId('cons_fatigue');
+                           $rosField->setValue('Fatigue');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][decreased activity]');
+                           $rosField->setId('decreased_activity');
+                           $rosField->setValue('Decreased Activity');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][malaise]');
+                           $rosField->setId('malaise');
+                           $rosField->setValue('Malaise');
+                           $rosField->showField();
+                           ?>
+                       </td>
                    </tr>
                    <tr>
                        <td></td>
-                       <td><input type="checkbox" name="constitutional" value="decreased_apetite" />Decreased Apetite</td>
-                       <td><input type="checkbox" name="constitutional" value="night_sweats" />Night Sweats</td>
-                       <td><input type="checkbox" name="constitutional" value="weight_gain" />Weight Gain</td>
-                       <td><input type="checkbox" name="constitutional" value="weight_loss" />Weight Loss</td>
-                       <td><input type="checkbox" name="constitutional" value="other" />Other</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][decreased apetite]');
+                           $rosField->setId('decreased_apetite');
+                           $rosField->setValue('Decreased Apetite');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][night sweats]');
+                           $rosField->setId('night_sweats');
+                           $rosField->setValue('Night Sweats');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][weight gain]');
+                           $rosField->setId('cons_weight_gain');
+                           $rosField->setValue('Weight Gain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Constitutional][weight loss]');
+                           $rosField->setId('weight_loss');
+                           $rosField->setValue('Weight Loss');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td></td><td></td><td></td><td></td>
                    </tr>
                    <tr>
                        <td>Skin:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][skin negative except HPI]');
+                           $rosField->setId('skin_neg_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][jaundice]');
+                           $rosField->setId('jaundice');
+                           $rosField->setValue('Jaundice');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][rash]');
+                           $rosField->setId('rash');
+                           $rosField->setValue('Rash');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][pruritus]');
+                           $rosField->setId('pruritus');
+                           $rosField->setValue('Pruritus');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][abrasions]');
+                           $rosField->setId('abrasions');
+                           $rosField->setValue('Abrasions');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][breakdown]');
+                           $rosField->setId('breakdown');
+                           $rosField->setValue('Breakdown');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][burns]');
+                           $rosField->setId('burns');
+                           $rosField->setValue('Burns');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][dryness]');
+                           $rosField->setId('drynes');
+                           $rosField->setValue('Dryness');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][petechiae]');
+                           $rosField->setId('petechiae');
+                           $rosField->setValue('Perechiae');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Skin][lesion]');
+                           $rosField->setId('lesion');
+                           $rosField->setValue('Lesion');
+                           $rosField->showField();
+                           ?>
+                       </td><td></td><td></td><td></td><td></td><td></td><td></td>
+                   </tr>
+                   <tr>
+                       <td></td><td><b><font color="red">Breast:</font></b></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][left]');
+                           $rosField->setId('left');
+                           $rosField->setValue('Left');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][right]');
+                           $rosField->setId('right');
+                           $rosField->setValue('Right');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][bilateral]');
+                           $rosField->setId('bilateral');
+                           $rosField->setValue('Bilateral');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][lump]');
+                           $rosField->setId('lump');
+                           $rosField->setValue('Lump');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][mass]');
+                           $rosField->setId('mass');
+                           $rosField->setValue('Mass');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][nipple discharge]');
+                           $rosField->setId('nipple_discharge');
+                           $rosField->setValue('Nipple Discharge');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][mild pain]');
+                           $rosField->setId('pain_mild');
+                           $rosField->setValue('Mild Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td></td><td></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][moderate pain]');
+                           $rosField->setId('moderate_pain');
+                           $rosField->setValue('Moderate Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][severe pain]');
+                           $rosField->setId('severe_pain');
+                           $rosField->setValue('Severe Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Breast][redness]');
+                           $rosField->setId('breast_redness');
+                           $rosField->setValue('Redness');
+                           $rosField->showField();
+                           ?>
+                       </td><td></td><td></td><td></td><td></td>
                    </tr>
                    <tr>
                        <td>Eyes:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][Eye negative except HPI]');
+                           $rosField->setId('eye_neg_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][vision unchanged]');
+                           $rosField->setId('vision_unchanged');
+                           $rosField->setValue('Vision Unchanged');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][recent vision problems]');
+                           $rosField->setId('recent_vision_problems');
+                           $rosField->setValue('Recent Vision Problems');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][pain]');
+                           $rosField->setId('eye_pain');
+                           $rosField->setValue('Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][discharge]');
+                           $rosField->setId('discharge');
+                           $rosField->setValue('Discharge');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][icterus]');
+                           $rosField->setId('icterus');
+                           $rosField->setValue('Icterus');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][diplopia]');
+                           $rosField->setId('diplopia');
+                           $rosField->setValue('Diplopia');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][blurred vision]');
+                           $rosField->setId('blurred_vision');
+                           $rosField->setValue('Blurred Vision');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][blindness]');
+                           $rosField->setId('blindness');
+                           $rosField->setValue('Blindness');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][eyelid redness]');
+                           $rosField->setId('eyelid_redness');
+                           $rosField->setValue('Eyelid Redness');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][conjuctival redness]');
+                           $rosField->setId('conjuctival_redness');
+                           $rosField->setValue('Conjuctival Redness');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][dryness]');
+                           $rosField->setId('dryness');
+                           $rosField->setValue('dryness');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][excessive tearing]');
+                           $rosField->setId('excessive_tearing');
+                           $rosField->setValue('Excessive Tearing');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][mattering]');
+                           $rosField->setId('mattering');
+                           $rosField->setValue('Mattering');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][eyelid swelling]');
+                           $rosField->setId('eyelid_swelling');
+                           $rosField->setValue('Eyelid Swelling');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][photophonia]');
+                           $rosField->setId('photophobia');
+                           $rosField->setValue('Photophobia');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Eyes][eye trauma]');
+                           $rosField->setId('eye_trauma');
+                           $rosField->setValue('Eye Trauma');
+                           $rosField->showField();
+                           ?>
+                       </td><td></td><td></td><td></td><td></td><td></td><td></td><td>  </td>
                    </tr>
                    <tr>
                        <td>ENMT:</td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT][ENMT negative except HPI]');
+                           $rosField->setId('enmt_neg_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT][ear pain]');
+                           $rosField->setId('ear_pain');
+                           $rosField->setValue('Ear Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT][sore throat]');
+                           $rosField->setId('sore_throat');
+                           $rosField->setValue('Sore Throat');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT][nasal congestion]');
+                           $rosField->setId('nasal_congestion');
+                           $rosField->setValue('Nasal Congestion');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT][sinus pain]');
+                           $rosField->setId('sinus_pain');
+                           $rosField->setValue('Sinus Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td></td><td></td><td></td>
+                   </tr>
+                   <tr>
+                       <td></td><td><b><font color="red">Ear:</font></b></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Ear][negative]');
+                           $rosField->setId('ear_negative');
+                           $rosField->setValue('Negative');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Ear][right]');
+                           $rosField->setId('ear_right');
+                           $rosField->setValue('Right');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Ear][left]');
+                           $rosField->setId('ear_left');
+                           $rosField->setValue('Left');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Ear][bilateral]');
+                           $rosField->setId('ear_bilateral');
+                           $rosField->setValue('Bilateral');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Ear][pain]');
+                           $rosField->setId('rosear_pain');
+                           $rosField->setValue('Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Ear][discharge]');
+                           $rosField->setId('ear_discharge');
+                           $rosField->setValue('Discharge');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Ear][tinnitus]');
+                           $rosField->setId('ear_tinnitus');
+                           $rosField->setValue('Tinnitus');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                   </tr>
+                   <tr> 
+                        <td></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Ear][decreased_hearing]');
+                           $rosField->setId('ear_decreased_hearing');
+                           $rosField->setValue('Decreased Hearing');
+                           $rosField->showField();
+                           ?>
+                       </td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                   </tr>
+                   <tr>
+                       <td></td><td><b><font color="red">Nose:</font></b></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Nose][negative]');
+                           $rosField->setId('nose_negative');
+                           $rosField->setValue('Negative');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Nose][congestion]');
+                           $rosField->setId('nose_congestion');
+                           $rosField->setValue('Congestion');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Nose][discharge]');
+                           $rosField->setId('nose_discharge');
+                           $rosField->setValue('Discharge');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Nose][bleeding]');
+                           $rosField->setId('nose_bleeding');
+                           $rosField->setValue('Bleeding');
+                           $rosField->showField();
+                           ?>
+                        </td><td></td><td></td><td></td>
+                   </tr>
+                   <tr>
+                       <td></td><td><b><font color="red">Mouth:</font></b></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][negative]');
+                           $rosField->setId('mouth_negative');
+                           $rosField->setValue('Negative');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][pain]');
+                           $rosField->setId('mouth_pain');
+                           $rosField->setValue('Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][swelling]');
+                           $rosField->setId('mouth_swelling');
+                           $rosField->setValue('Swelling');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][bleeding gums]');
+                           $rosField->setId('mouth_bleeding_gums');
+                           $rosField->setValue('Bleeding Gums');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][oral lesions]');
+                           $rosField->setId('mouth_oral_lesions');
+                           $rosField->setValue('Oral Lesions');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][dry mouth]');
+                           $rosField->setId('dry_mouth');
+                           $rosField->setValue('Dry Mouth');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][dental pain]');
+                           $rosField->setId('mouth_dental_pain');
+                           $rosField->setValue('Dental Pain');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                   </tr>
+                   <tr>
+                       <td></td><td><b><font color="red">Throat:</font></b></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][negative]');
+                           $rosField->setId('throat_negative');
+                           $rosField->setValue('Negative');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][pain]');
+                           $rosField->setId('thoat_pain');
+                           $rosField->setValue('Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][swelling]');
+                           $rosField->setId('throat_swelling');
+                           $rosField->setValue('Swelling');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][difficulty swallowing]');
+                           $rosField->setId('difficulty_swallowing');
+                           $rosField->setValue('Difficulty Swallowing');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[ENMT: Mouth][hoarse]');
+                           $rosField->setId('throat_hoarse');
+                           $rosField->setValue('Hoarse');
+                           $rosField->showField();
+                           ?>
+                       </td><td></td><td></td>
                    </tr>
                    <tr>
                        <td>Respiratory:</td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Respiratory][respiratory neg except HPI]');
+                           $rosField->setId('respiratory_neg_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Respiratory][sob]');
+                           $rosField->setId('sob');
+                           $rosField->setValue('SOB');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Respiratory][orthopnea]');
+                           $rosField->setId('orthopnea');
+                           $rosField->setValue('Orthopnea');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Respiratory][cough]');
+                           $rosField->setId('respiratory_cough');
+                           $rosField->setValue('Cough');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Respiratory][hemoptysis]');
+                           $rosField->setId('respiratory_hemoptysis');
+                           $rosField->setValue('Hemoptysis');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Respiratory][sputum production]');
+                           $rosField->setId('respiratory_sputum_production');
+                           $rosField->setValue('Sputum Production');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Respiratory][stridor]');
+                           $rosField->setId('respiratory_stridor');
+                           $rosField->setValue('Stridor');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Respiratory][wheezing]');
+                           $rosField->setId('respiratory_wheezing');
+                           $rosField->setValue('Wheezing');
+                           $rosField->showField();
+                           ?>
+                       </td>
                    </tr>
                    <tr>
                        <td>Cardiovascular:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Cardiovascular][cardiovascular neg except HPI]');
+                           $rosField->setId('cardiovascular_neg_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Cardiovascular][chest pain]');
+                           $rosField->setId('cardiovascular_chest_pain');
+                           $rosField->setValue('Chest Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Cardiovascular][palpitations]');
+                           $rosField->setId('cardiovascular_palpitations');
+                           $rosField->setValue('Palpitations');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Cardiovascular][tachycardia]');
+                           $rosField->setId('cardiovsscular_tachy');
+                           $rosField->setValue('Tachycardia');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Cardiovascular][syncope]');
+                           $rosField->setId('cardiovascular_syncope');
+                           $rosField->setValue('Syncope');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Cardiovascular][diaphoresis]');
+                           $rosField->setId('cardiovascular_diaphoresis');
+                           $rosField->setValue('Diaphoresis');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Cardiovascular][peripheral edema]');
+                           $rosField->setId('peripheral_edema');
+                           $rosField->setValue('Peripheral Edema');
+                           $rosField->showField();
+                           ?>
+                       </td><td></td>
                    </tr>
                    <tr>
-                       <td>Gastroenteritis:</td>
+                       <td>Gastrointestinal:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][GI neg except HPI]');
+                           $rosField->setId('gi_neg_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][abdominal_pain]');
+                           $rosField->setId('gi_abdominal_pain');
+                           $rosField->setValue('Abdominal Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][nausea]');
+                           $rosField->setId('gi_nausea');
+                           $rosField->setValue('Nausea');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][vomiting]');
+                           $rosField->setId('gi_vomiting');
+                           $rosField->setValue('Vomiting');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][diarrhea]');
+                           $rosField->setId('gi_diarrhea');
+                           $rosField->setValue('Diarrhea');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][constipation]');
+                           $rosField->setId('constipation');
+                           $rosField->setValue('Constipation');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][dysphagia]');
+                           $rosField->setId('dysphagia');
+                           $rosField->setValue('Dysphagia');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][rectal bleeding]');
+                           $rosField->setId('rectal_bleeding');
+                           $rosField->setValue('Rectal Bleeding');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][rectal pain]');
+                           $rosField->setId('rectal_pain');
+                           $rosField->setValue('Rectal Pain');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][change in bowel habits]');
+                           $rosField->setId('change_in_bowel_habits');
+                           $rosField->setValue('Change in Bowel Habits');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][change in stool color]');
+                           $rosField->setId('change_in_stool_color');
+                           $rosField->setValue('Change in Stool Color');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Gastrointestinal][change in stool consistency]');
+                           $rosField->setId('change_in_stool_consistency');
+                           $rosField->setValue('Change in Stool Consistency');
+                           $rosField->showField();
+                           ?>
+                       </td>
+                       <td>
+                       </td>
+                       <td>
+                        </td><td></td><td></td>
+                   </tr>
+                   <tr>
+                       <td></td><td><b><font color="red">Abdominal Pain:</font></b></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][mild]');
+                           $rosField->setId('abd_mild');
+                           $rosField->setValue('Mild');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][moderate]');
+                           $rosField->setId('abd_moderate');
+                           $rosField->setValue('Moderate');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][severe]');
+                           $rosField->setId('abd_severe');
+                           $rosField->setValue('Severe');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][diffuse]');
+                           $rosField->setId('diffuse');
+                           $rosField->setValue('Diffuse');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][right upper quadrant]');
+                           $rosField->setId('ruq');
+                           $rosField->setValue('RUQ');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][left upper quadrant]');
+                           $rosField->setId('luq');
+                           $rosField->setValue('LUQ');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][right lower quadrant]');
+                           $rosField->setId('rlq');
+                           $rosField->setValue('RLQ');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][left lower quadrant]');
+                           $rosField->setId('llq');
+                           $rosField->setValue('LLQ');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][right flank]');
+                           $rosField->setId('r_flank');
+                           $rosField->setValue('R Flank');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][left flank]');
+                           $rosField->setId('l_flank');
+                           $rosField->setValue('L Flank');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][epigastric]');
+                           $rosField->setId('epigastric');
+                           $rosField->setValue('Epigastric');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][periumbilical]');
+                           $rosField->setId('periumbilical');
+                           $rosField->setValue('Periumbilical');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][suprapubic]');
+                           $rosField->setId('suprapubic');
+                           $rosField->setValue('Suprapubic');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][pelvic]');
+                           $rosField->setId('pelvic');
+                           $rosField->setValue('Pelvic');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][acute]');
+                           $rosField->setId('acute');
+                           $rosField->setValue('Acute');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][chronic]');
+                           $rosField->setId('chronic');
+                           $rosField->setValue('Chronic');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][sharp]');
+                           $rosField->setId('sharp');
+                           $rosField->setValue('Sharp');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][colicky]');
+                           $rosField->setId('colicky');
+                           $rosField->setValue('Colicky');
+                           $rosField->showField();
+                           ?>
+                            </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][dull]');
+                           $rosField->setId('dull');
+                           $rosField->setValue('Dull');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][achy]');
+                           $rosField->setId('achy');
+                           $rosField->setValue('Achy');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][burning]');
+                           $rosField->setId('burning');
+                           $rosField->setValue('Burning');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][cramping]');
+                           $rosField->setId('cramping');
+                           $rosField->setValue('Cramping');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][pressure]');
+                           $rosField->setId('abd_pressure');
+                           $rosField->setValue('Pressure');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[GI: Abdominal Pain][pain]');
+                           $rosField->setId('abd_pain');
+                           $rosField->setValue('Pain');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                    </tr>
                    <tr>
                        <td>Genitourinary:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][negative except HPI]');
+                           $rosField->setId('gu_neg_except_hpi');
+                           $rosField->setValue('Negative except HPI');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][dysuria]');
+                           $rosField->setId('gu_dysuria');
+                           $rosField->setValue('Dysuria');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][hematuria]');
+                           $rosField->setId('hematuria');
+                           $rosField->setValue('Hematuria');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][vaginal bleeding]');
+                           $rosField->setId('vaginal_bleeding');
+                           $rosField->setValue('Vaginal Bleeding');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][vaginal discharge]');
+                           $rosField->setId('vaginal_discharge');
+                           $rosField->setValue('Vaginal Discharge');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][pelvic pain]');
+                           $rosField->setId('pelvic_pain');
+                           $rosField->setValue('Pelvic Pain');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][irregular period]');
+                           $rosField->setId('irregular_period');
+                           $rosField->setValue('Irregular Period');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][lesions]');
+                           $rosField->setId('gu_lesions');
+                           $rosField->setValue('Lesions');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        </td><td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][excessive urination]');
+                           $rosField->setId('excessive_urination');
+                           $rosField->setValue('Excessive Urination');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][urinary incontinence]');
+                           $rosField->setId('urinary_incontinence');
+                           $rosField->setValue('Urinary Incontinence');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][urinary retention]');
+                           $rosField->setId('urinary_retention');
+                           $rosField->setValue('Urinary Retention');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Genitourinary][nocturia]');
+                           $rosField->setId('nocturia');
+                           $rosField->setValue('Nocturia');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td></td><td></td><td></td><td></td>
                    </tr>
                    <tr>
                        <td>Musculoskeletal:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][negative except HPI]');
+                           $rosField->setId('musc_neg_except_hpi');
+                           $rosField->setValue('Negative except HPI');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][back pain]');
+                           $rosField->setId('muscback_pain');
+                           $rosField->setValue('Back Pain');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][muscle pain]');
+                           $rosField->setId('muscle_pain');
+                           $rosField->setValue('Muscle Pain');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][Joint pain]');
+                           $rosField->setId('joint_pain');
+                           $rosField->setValue('Joint Pain');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][claudication]');
+                           $rosField->setId('claudication');
+                           $rosField->setValue('Claudication');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        </td><td>    
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][right]');
+                           $rosField->setId('muscright');
+                           $rosField->setValue('Right');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][left]');
+                           $rosField->setId('muscleft');
+                           $rosField->setValue('Left');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][bilateral]');
+                           $rosField->setId('muscbilateral');
+                           $rosField->setValue('Bilateral');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][neck]');
+                           $rosField->setId('muscneck');
+                           $rosField->setValue('Neck');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][hand]');
+                           $rosField->setId('muschand');
+                           $rosField->setValue('Hand');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][forearm]');
+                           $rosField->setId('muscforearm');
+                           $rosField->setValue('Forearm');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][upper arm]');
+                           $rosField->setId('muscupper_arm');
+                           $rosField->setValue('Upper Arm');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][shoulder]');
+                           $rosField->setId('muscshoulder');
+                           $rosField->setValue('Shoulder');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        </td><td>    
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][foot]');
+                           $rosField->setId('muscfoot');
+                           $rosField->setValue('Foot');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][lower leg]');
+                           $rosField->setId('musclower_leg');
+                           $rosField->setValue('Lower Leg');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][knee]');
+                           $rosField->setId('muscknee');
+                           $rosField->setValue('Knee');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][thigh]');
+                           $rosField->setId('muscthigh');
+                           $rosField->setValue('Thigh');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][hip]');
+                           $rosField->setId('muschip');
+                           $rosField->setValue('Hip');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][back]');
+                           $rosField->setId('muscback');
+                           $rosField->setValue('Back');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][acute]');
+                           $rosField->setId('muscacute');
+                           $rosField->setValue('Acute');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][chronic]');
+                           $rosField->setId('muscchronic');
+                           $rosField->setValue('Chronic');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>   
+                        </td><td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][diffuse]');
+                           $rosField->setId('muscdiffuse');
+                           $rosField->setValue('Diffuse');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][pain]');
+                           $rosField->setId('muscpain');
+                           $rosField->setValue('Pain');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][stiffness]');
+                           $rosField->setId('stiffness');
+                           $rosField->setValue('Stiffness');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][swelling]');
+                           $rosField->setId('muscswelling');
+                           $rosField->setValue('Swelling');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][redness]');
+                           $rosField->setId('muscredness');
+                           $rosField->setValue('Redness');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][warmth]');
+                           $rosField->setId('warmth');
+                           $rosField->setValue('Warmth');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][decreasedrom]');
+                           $rosField->setId('decreased_rom');
+                           $rosField->setValue('Decreased ROM');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Musculoskeletal][trauma]');
+                           $rosField->setId('trauma');
+                           $rosField->setValue('Trauma');
+                           $rosField->showField();
+                           ?>
+                        </td>
                    </tr>
                    <tr>
                        <td>Neurologic:</td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][negative except hpi]');
+                           $rosField->setId('neuro_negative_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][headache]');
+                           $rosField->setId('neuro_ros_headache');
+                           $rosField->setValue('Headache');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][dizziness]');
+                           $rosField->setId('neurodizziness');
+                           $rosField->setValue('Dizziness');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][altered LOC]');
+                           $rosField->setId('altered_loc');
+                           $rosField->setValue('Altered LOC');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][numbness]');
+                           $rosField->setId('neuronumbness');
+                           $rosField->setValue('Numbness');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][tingling]');
+                           $rosField->setId('neurotingling');
+                           $rosField->setValue('Tingling');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][weakness]');
+                           $rosField->setId('neuroweakness');
+                           $rosField->setValue('Weakness');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][decreased motor function]');
+                           $rosField->setId('neuro_decreased_motor_function');
+                           $rosField->setValue('Decreased Motor Function');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        </td><td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][decreased sensation]');
+                           $rosField->setId('neuro_decreased_sensation');
+                           $rosField->setValue('Decreased Sensation');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][abnormal balance]');
+                           $rosField->setId('neuro_abnormal_balance');
+                           $rosField->setValue('Abnormal Balance');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][seizure]');
+                           $rosField->setId('neuroseizure');
+                           $rosField->setValue('Seizure');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][altered coordination]');
+                           $rosField->setId('neuro_altered_coordination');
+                           $rosField->setValue('Altered Coordination');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][vision changes]');
+                           $rosField->setId('neuro_vision_changes');
+                           $rosField->setValue('Vision Changes');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][hearing loss]');
+                           $rosField->setId('neuro_hearing_loss');
+                           $rosField->setValue('Hearing Loss');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][speech problem]');
+                           $rosField->setId('neuro_speech_problem');
+                           $rosField->setValue('Speech Problem');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][memory loss]');
+                           $rosField->setId('neuro_memory_loss');
+                           $rosField->setValue('Memory Loss');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        </td><td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][bowel or bladder dysfunction]');
+                           $rosField->setId('neuro_bowel_or_bladder_dysfunction');
+                           $rosField->setValue('Bowel or Bladder Dysfunction');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Neurologic][difficulty swallowing]');
+                           $rosField->setId('neuro_difficulty_swallowing');
+                           $rosField->setValue('Difficulty Swallowing');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td>
                    </tr>
                    <tr>
                        <td>Psychiatric:</td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][negative except hpi]');
+                           $rosField->setId('psy_negative_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][anxiety]');
+                           $rosField->setId('psy_anxiety');
+                           $rosField->setValue('Anxiety');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][depression]');
+                           $rosField->setId('depression');
+                           $rosField->setValue('Depression');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][mania]');
+                           $rosField->setId('mania');
+                           $rosField->setValue('Mania');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][suicidal]');
+                           $rosField->setId('suicidal');
+                           $rosField->setValue('Suicidal');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][homicidal]');
+                           $rosField->setId('homicidal');
+                           $rosField->setValue('Homicidal');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][delusional]');
+                           $rosField->setId('delusional');
+                           $rosField->setValue('Delusional');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][hallucinations]');
+                           $rosField->setId('hallucinations');
+                           $rosField->setValue('Hallucinations');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr> 
+                         </td><td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][eating disorder]');
+                           $rosField->setId('eating_disorder');
+                           $rosField->setValue('Eating Disorder');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][irritability]');
+                           $rosField->setId('irritability');
+                           $rosField->setValue('Irritability');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][sleeping problems]');
+                           $rosField->setId('sleeping_problems');
+                           $rosField->setValue('Sleeping Problems');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Psychiatric][substance abuse]');
+                           $rosField->setId('substance_abuse');
+                           $rosField->setValue('Substance Abuse');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td></td><td></td><td></td><td></td>
                    </tr>
                    <tr>
                        <td>Endocrinic:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][negative except HPI]');
+                           $rosField->setId('endo_negative_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                         <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][polyuria]');
+                           $rosField->setId('polyuria');
+                           $rosField->setValue('Polyuria');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][polydipsia]');
+                           $rosField->setId('polydipsia');
+                           $rosField->setValue('Polydipsia');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][hyperglycemia]');
+                           $rosField->setId('hyperglycemia');
+                           $rosField->setValue('Hyperglycemia');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][hypoglycemia]');
+                           $rosField->setId('hypoglycemia');
+                           $rosField->setValue('Hypoglycemia');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][heat intolerance]');
+                           $rosField->setId('heat_intolerance');
+                           $rosField->setValue('Heat Intolerance');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][cold intolerance]');
+                           $rosField->setId('cold_intolerance');
+                           $rosField->setValue('Cold Intolerance');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][change in hair texture]');
+                           $rosField->setId('change_in_hair_texture');
+                           $rosField->setValue('Change in Hair Texture');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        </td><td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][dry skin]');
+                           $rosField->setId('dry_skin');
+                           $rosField->setValue('Dry Skin');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][hot flashes]');
+                           $rosField->setId('hot_flashes');
+                           $rosField->setValue('Hot Flashes');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][galactorrhea]');
+                           $rosField->setId('galactorrhea');
+                           $rosField->setValue('Galactorrhea');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Endocrinic][hursutism]');
+                           $rosField->setId('hursutism');
+                           $rosField->setValue('Hursutism');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td></td><td></td><td></td><td></td>
                    </tr>
                    <tr>
                        <td>Heme/Lymph:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Heme/Lymph][negative except HPI]');
+                           $rosField->setId('heme_negative_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Heme/Lymph][bleeding tendency]');
+                           $rosField->setId('bleeding_tendency');
+                           $rosField->setValue('Bleeding Tendency');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Heme/Lymph][bruising_tendency]');
+                           $rosField->setId('brusing_tendency');
+                           $rosField->setValue('Brusing Tendency');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Heme/Lymph][petechiae]');
+                           $rosField->setId('heme_petechiae');
+                           $rosField->setValue('Petechiae');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Heme/Lymph][gum bleeding]');
+                           $rosField->setId('gum_bleeding');
+                           $rosField->setValue('Gum Bleeding');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Heme/Lymph][swollen nodes]');
+                           $rosField->setId('swollen_nodes');
+                           $rosField->setValue('Swollen Nodes');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td></td><td></td>
                    </tr>
                    <tr>
-                       <td>Allegy/Ammunologic:</td>
+                       <td>Allergy/Immunologic:</td>
+                       <td>
+                           <?php
+                           $rosField->setName('ros[Allergy/Immunologic][negative except hpi]');
+                           $rosField->setId('allergy_negative_except_hpi');
+                           $rosField->setValue('Negative Except HPI');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Allergy/Immunologic][seasonal allergies]');
+                           $rosField->setId('seasonal_allergies');
+                           $rosField->setValue('Seasonal Allergies');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Allergy/Immunologic][food allergies]');
+                           $rosField->setId('food_allergies');
+                           $rosField->setValue('Food Allergies');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Allergy/Immunologic][reccurent infections]');
+                           $rosField->setId('recurrent_infections');
+                           $rosField->setValue('Recurrent Infections');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Allergy/Immunologic][impaired immunity]');
+                           $rosField->setId('impaired_immunity');
+                           $rosField->setValue('Impaired Immunity ');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Allergy/Immunologic][immunosuppressive therapy]');
+                           $rosField->setId('immunosuppressive_therapy');
+                           $rosField->setValue('Immunosuppressive Therapy');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                       <td></td><td></td>
                    </tr>
                    <tr>
-                       <td>Additional ROS info:</td>
+                       <td></td><td><b><font color="red">HIV:</font></b></td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Allergy/Immunologic: HIV][cd4]');
+                           $rosField->setId('cdr4');
+                           $rosField->setValue('CD4');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td>
+                           <?php
+                           $rosField->setName('ros[Allergy/Immunologic: HIV][viral load]');
+                           $rosField->setId('viral_load');
+                           $rosField->setValue('Viral Load');
+                           $rosField->showField();
+                           ?>
+                        </td>
+                        <td></td><td></td><td></td><td></td><td></td>
+                   </tr>
+                   <tr>
+                       <td>Additional ROS Information:</td>
+                       <td colspan="8">
+                            <input type="text" class="form-control" id="ros_notes" name="ros_notes" placeholder="Other ROS Notes" size="80" />
+                        </td>
                    </tr>
             </table>
             <br>
@@ -208,31 +3205,31 @@
             <table>
                  <colgroup>
                     <col span="1" width="200">
-                    <col span="50" width="1000">
+                    <col span="1" width="1000">
                </colgroup>
                    <tr>
                        <td>Medical History: </td>
-                       <td><input type="text" class="form-control" name="medical" placeholder="Insert any medical history" required/></td>
+                       <td><input type="text" class="form-control" name="emr[hx_medical]" placeholder="Insert any medical history" /></td>
                    </tr>
                    <tr>
                        <td>Surgical History: </td>
-                       <td><input type="text" class="form-control" name="surgical" placeholder="Insert any surgical history" required/></td>
+                       <td><input type="text" class="form-control" name="emr[hx_surgical]" placeholder="Insert any surgical history" /></td>
                    </tr>
                    <tr>
                        <td>Social History: </td>
-                       <td><input type="text" class="form-control" name="social" placeholder="Insert any social history" required/></td>
+                       <td><input type="text" class="form-control" name="emr[hx_social]" placeholder="Insert any social history" value="<?php echo 'Tobacco Use: ' . $patient->getTobaccoUse() . ', Alcohol Use: ' . $patient->getAlcoholUse(); ?>"/></td>
                    </tr>
                    <tr>
                        <td>Family History: </td>
-                       <td><input type="text" class="form-control" name="family" placeholder="Insert any family history" required/></td>
+                       <td><input type="text" class="form-control" name="emr[hx_family]" placeholder="Insert any family history" value="<?php echo $patient->getFamilyHistory(); ?>"/></td>
                    </tr>
                    <tr>
                        <td>Medications: </td>
-                       <td><input type="text" class="form-control" name="medication" placeholder="Insert all medications" required/></td>
+                       <td><input type="text" class="form-control" name="emr[hx_medication]" placeholder="Insert all medications" /></td>
                    </tr>
                    <tr>
                        <td>Allergies: </td>
-                       <td><input type="text" class="form-control" name="allergies" placeholder="Insert any allergies" required/></td>
+                       <td><input type="text" class="form-control" name="emr[hx_allergies]" placeholder="Insert any allergies" value="<?php echo $patient->getMedicationAllergy(); ?>" /></td>
                    </tr>
             </table>
             <br>
@@ -243,51 +3240,51 @@
             <table>
                  <colgroup>
                     <col span="1" width="120">
-                    <col span="50" width="700">
+                    <col span="1" width="1000">
                </colgroup>
                    <tr>
                        <td>General: </td>
-                       <td><input type="text" class="form-control" name="general" placeholder="General Exams" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_general]" placeholder="General Exams" /></td>
                    </tr>
                    <tr>
                        <td>Skin: </td>
-                       <td><input type="text" class="form-control" name="skin" placeholder="Skin Exams" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_skin]" placeholder="Skin Exams" /></td>
                    </tr>
                    <tr>
                        <td>Head: </td>
-                       <td><input type="text" class="form-control" name="head" placeholder="Head Exams" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_head]" placeholder="Head Exams" /></td>
                    </tr>
                    <tr>
                        <td>Eyes: </td>
-                       <td><input type="text" class="form-control" name="eye" placeholder="Eye Exams" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_eyes]" placeholder="Eye Exams" /></td>
                    </tr>
                    <tr>
                        <td>ENMT: </td>
-                       <td><input type="text" class="form-control" name="enmt" placeholder="ENMT" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_enmt]" placeholder="ENMT Exams" /></td>
                    </tr>
                    <tr>
                        <td>Neck: </td>
-                       <td><input type="text" class="form-control" name="neck" placeholder="Neck" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_neck]" placeholder="Neck Exams" /></td>
                    </tr>
                    <tr>
                        <td>Cardiovascular:</td>
-                       <td><input type="text" class="form-control" name="cardiovascular" placeholder="Cardiovascular Exams" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_cardiovascular]" placeholder="Cardiovascular Exams" /></td>
                    </tr>
                    <tr>
                        <td>Abdominal:</td>
-                       <td><input type="text" class="form-control" name="abdominal" placeholder="Abdominal Exams" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_abdominal]" placeholder="Abdominal Exams" /></td>
                    </tr>
                    <tr>
-                       <td>Extremetis:</td>
-                       <td><input type="text" class="form-control" name="extremetis" placeholder="Extremetis" required/></td>
+                       <td>Extremities:</td>
+                       <td><input type="text" class="form-control" name="emr[pe_extremities]" placeholder="Extremities" /></td>
                    </tr>
                    <tr>
                        <td>Neurological:</td>
-                       <td><input type="text" class="form-control" name="neurological" placeholder="Neurological Exams" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_neurological]" placeholder="Neurological Exams" /></td>
                    </tr>
                    <tr>
                        <td>Psychiatric:</td>
-                       <td><input type="text" class="form-control" name="pyschiatric" placeholder="Psychiatric Exams" required/></td>
+                       <td><input type="text" class="form-control" name="emr[pe_psychiatric]" placeholder="Psychiatric Exams" /></td>
                    </tr>
             </table>
             <br>
@@ -296,47 +3293,83 @@
         <div style="border-bottom: solid; border-color: red;">
             <h4><center><b>Medical Desicion Making</b></center></h4>
             <table>
+                <colgroup>
+                    <col span="1" width="120">
+                    <col span="1" width="1000">
+               </colgroup>
                 <tr>
                     <td>Labs:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_labs]" placeholder="Insert any lab information" /></td>
                 </tr>
                 <tr>
                     <td>Imaging:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_imaging]" placeholder="Insert any imaging information" /></td>
                 </tr>
                 <tr>
                     <td>EKG:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_ekg]" placeholder="Insert any EKG information" /></td>
                 </tr>
                 <tr>
                     <td>COURSE/MDM:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_course]" placeholder="Insert any course/mdm information" /></td>
                 </tr>
                 <tr>
                     <td>CONSULTS:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_consults]" placeholder="Insert any consult information" /></td>
                 </tr>
             </table>
             <br>
         </div>
         <br>
-        <div>
+        <div style="border-bottom: solid; border-color: red;">
             <h4><center><b>Diagnosis and Disposition</b></center></h4>
             <table>
                  <colgroup>
                     <col span="1" width="120">
-                    <col span="2" width="1000">
+                    <col span="1" width="1000">
                </colgroup>
                    <tr>
                        <td>Diagnosis: </td>
+                       <td><input type="text" class="form-control" name="emr[diagnosis]" placeholder="Diagnosis" /></td>
                    </tr>
                     <tr>
                        <td>Disposition: </td>
-                       <td><input type="text" class="form-control" name="disposition" placeholder="" required/></td>
+                       <td><input type="text" class="form-control" name="emr[disposition]" placeholder="Disposition" /></td>
                    </tr>
                     <tr>
                        <td>Discharge Instructions: </td>
-                       <td><input type="text" class="form-control" name="instructions" placeholder="" required/></td>
+                       <td><input type="text" class="form-control" name="emr[discharge_instructions]" placeholder="Discharge Instructions" /></td>
                    </tr>
             </table>
             <br>
         </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Physician's Signature</b></center></h4>
+        <div class="alert alert-danger">
+            <strong>*Please acknowledge that entering your name below indicates that the information you have provided is accurate.*</strong> 
+        </div>
+            <table>
+                 <colgroup>
+                    <col span="1" width="140">
+                    <col span="1" width="700">
+                    <col span="1" width="140">
+                    <col span="1" width="1000">
+               </colgroup>
+                   <tr>
+                       <td>Physician Signature: </td>
+                       <td><input type="text" class="form-control" name="emr[physician_signature]" placeholder="Signature Here" /></td>
+                       <td><b><font color="red">Date:</font></b></td>
+                       <td><input type="date" class="form-control" name="emr[signed_date]" placeholder="Today's Date" /></td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        
+        
         <center><input class="btn btn-primary" id="submit" type="submit" name="submitEMR" value="SUBMIT"></center><br>
     </div>
     </div>
+    </form>
 </div>
+<br><br><br>

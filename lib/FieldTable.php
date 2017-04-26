@@ -17,14 +17,14 @@ final class FieldTable extends Field {
         if ($this->getLabel()) {
             $html_string .= '<label class="col-lg-8 control-label">' . $this->getLabel() . '</label>';
         }
-        // if ($this->GetTableSort() !== 0 && $this->getId()) {
-        //     $html_string .= '<script>';
-        //     $html_string .= '$(document).ready(function(){';
-        //     $html_string .= '$("#' . $this->getId() . '").tablesorter({';
-        //     $html_string .= 'widgets: ["zebra"], widgetZebra: { css: [ "alt", "" ] }';
-        //     $html_string .= '});});';
-        //     $html_string .= '</script>';
-        // }
+        //if ($this->GetTableSort() !== 0 && $this->getId()) {
+            // $html_string .= '<script>';
+            // $html_string .= '$(document).ready(function(){';
+            // $html_string .= '$("#' . $this->getId() . '").tablesorter({';
+            // $html_string .= 'widgets: ["zebra"], widgetZebra: { css: [ "alt", "" ] }';
+            // $html_string .= '});});';
+            // $html_string .= '</script>';
+        //}
         if ($this->getClass()) {
             $html_string .= '<div class="' . $this->getClass() . '">';
         }

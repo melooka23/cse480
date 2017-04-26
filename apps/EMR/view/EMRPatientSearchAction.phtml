@@ -1,0 +1,63 @@
+    <div class="container">
+      <div class="section text-center">
+        <h2 class="section-heading">Search for Patient Records</h2><hr>
+      </div>
+      
+      <form class="form-horizontal" method='post' role="form" data-parsley-validate="" id="EMRPatientSearch" action="#">
+      <h4><center><b>Search Parameters</b></center></h4>
+            <div class="row personal-info">    
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" id="firstname" name="search[firstname]" <?php if(isset($search['firstname'])){ echo 'value="' . $search['firstname']. '"' ;} ?> >
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" id="lastname" name="search[lastname]" <?php if(isset($search['lastname'])){ echo 'value="' . $search['lastname']. '"' ;} ?> >
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Appointment Date</label>
+                  <input type="date" class="form-control" id="appointment_date" name="search[appointment_date]" <?php if(isset($search['appointment_date'])){ echo 'value="' . $search['appointment_date']. '"' ;} ?> >
+                </div>
+              </div>
+              
+              <div class="form-group">
+              <center><input class="btn btn-primary" id="searchButton" type="submit" name="searchButton" value="Search Records">
+                </center>
+           </div>
+
+            <hr>
+            <center>
+        <table style=width:100%;>
+    <center><?php
+    $tablefield = new FieldTable();
+    $tablefield->setClass('col-lg-8');
+    $tablefield->setID('myTable');
+    $tablefield->setValue($mylist);
+    $tablefield->setNav("index.php?controller=EMR&action=EMRView&appointment_id=");
+    $tablefield->ShowField();
+    ?></center>
+    </table>
+                
+            </center>
+            
+          </form> 
+          
+          <hr>
+    </div>
+  </div>   
+  
+  <script>
+    function DoNav(the_link, new_window) {
+    if (new_window === undefined) {
+        document.location.href = the_link;
+    } else {
+        var windowresult = window.open("");
+        windowresult.location.href = the_link;
+    }
+}
+</script>

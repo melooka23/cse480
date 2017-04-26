@@ -3,22 +3,23 @@
       <div class="section text-center">
         <h2 class="section-heading">Open New <span>Appointments</span></h2><hr>
       </div>  
+      <div id="appointContain">
       <form class="form-horizontal" method='post' role="form" data-parsley-validate="" id="createappointmentsection" action="#">
         
         <br>
           <h4>
               <center>
-                  <b>Select a date, and which appointment times you would like to open to patients</b>
+                  <b>Select a date, and which appointment times you would like to be open to patients</b>
                   </center>
             </h4>
             
             <br>
             
             <div class="row">    
-              <div class="col-sm-4" style="margin:0px 430px;" align="middle">
+              <div class=container align="center">
                 <div class="form-group">
                     <label>
-                        <center>Appointment Date:</center>
+                        Appointment Date:
                     </label>
               <table>
                   <thead></thead>
@@ -45,24 +46,32 @@
                 </div>
               </div>
               
-            </div>
-              
-                <div class="form-group">
-                    <center>
-                        <div class="col-sm-4" style="margin:0px 430px;" align="center">
-  <label>Appointment Times for <?php if($appointment_date){
+            
+            <label>Appointment Times for <?php if($appointment_date){
                                   echo date('m/d/Y', strtotime($appointment_date));
                                   }
-                            ?>:</label>
+                            ?>:</label> 
+            <br> </br>
+            <button type="button" class="btn btn-danger"> Check All Times
+            <input name="chk-all1[]" id="chk-all" type="checkbox">
+            </button>
+    </div>
+    <div class= "row">
+                  <!-- Morning Column -->
+                  <div class= "col-md-4">
+                  <div class="form-group">
+                <!--    <center>  -->
+                  <!--<div class="col-sm-4" style="margin:0px 430px;" align="center"> -->
+  
+  <h2> Morning </h2>
   <table class="table table-hover" id="medicationsTable">
             <thead>
                 <tr>
-                    <th><input name="chk-all[]" id="chk-all" type="checkbox"></th>
-                    <th>Time</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($possible_times as $possible_time) { ?>
+                <?php foreach ($possible_times as $possible_time) 
+                if($possible_time->getID() <=8 ){{ ?>
                     <tr>
                         <td>
                             <input name="<?php echo 'chk[' . $possible_time->getID() . ']'; ?>" 
@@ -74,27 +83,103 @@
                                         }
                                     }
                                 }
-                            ?>
-                            >
+                            ?>>
                         </td>
                         <td>
                             <?php echo $possible_time->getTime(); ?>
                         </td>
-                        
                     </tr>
-                <?php } ?>
+                <?php }
+                } ?>
+            </tbody>
+        </table>
+      </div>
+    </div>
+        <!-- Afternoon Column -->
+            <div class= "col-md-4">
+                  <div class="form-group">
+  
+             <h2> Afternoon </h2>
+      <table class="table table-hover" id="medicationsTable">
+            <thead>
+            </thead>
+            <tbody>
+                <?php foreach ($possible_times as $possible_time) 
+                if(($possible_time->getID() >=9) && ($possible_time->getID() <=26) ){{ ?>
+                    <tr>
+                        <td>
+                            <input name="<?php echo 'chk[' . $possible_time->getID() . ']'; ?>" 
+                            type="checkbox"
+                            <?php if (isset($selected_times)) {
+                                    foreach ($selected_times as $selectd_time) {
+                                        if ($selectd_time->getAppointmentTimeFK()->getID() == $possible_time->getId()) {
+                                            echo "checked";
+                                        }
+                                    }
+                                }
+                            ?>>
+                        </td>
+                        <td>
+                            <?php echo $possible_time->getTime(); ?>
+                        </td>
+                    </tr>
+                <?php }
+                } ?>
             </tbody>
         </table>
       </div>
               
-              </center>
+             
+            </div>   
+             
+             <!-- Evening Column -->
+             <div class="col-md-4">
+                 <div class="form-group">
+  
+             <h2> Evening </h2>
+      <table class="table table-hover" id="medicationsTable">
+            <thead>
+            </thead>
+            <tbody>
+                <?php foreach ($possible_times as $possible_time) 
+                if(($possible_time->getID() >=27) && ($possible_time->getID() <=34) ){{ ?>
+                    <tr>
+                        <td>
+                            <input name="<?php echo 'chk[' . $possible_time->getID() . ']'; ?>" 
+                            type="checkbox"
+                            <?php if (isset($selected_times)) {
+                                    foreach ($selected_times as $selectd_time) {
+                                        if ($selectd_time->getAppointmentTimeFK()->getID() == $possible_time->getId()) {
+                                            echo "checked";
+                                        }
+                                    }
+                                }
+                            ?>>
+                        </td>
+                        <td>
+                            <?php echo $possible_time->getTime(); ?>
+                        </td>
+                    </tr>
+                <?php }
+                } ?>
+            </tbody>
+        </table>
+      </div>
+              
+             
+            </div>         
             </div>
+        <!-- Save Availability Code -->
             <center><input class="btn btn-primary" id="submit" type="submit" name="createAppointment" value="Save Available Appointments"></center><br>
           </form>
     </div>
+    </div>
+    </div>
+    
+    <br><br><br><br>
     
     <script>
-    $("#chk-all").change(function () {
+    $("#chk-all").click(function () {
         $('input[name^=chk]').prop('checked', $(this).prop("checked"));
     });
     </script>

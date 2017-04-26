@@ -32,6 +32,7 @@ class Field {
     protected $onchange;
     protected $onfocus;
     protected $onblur;
+    protected $onclick;
 
     public function setClass($class) {
         $this->class = $class;
@@ -215,6 +216,14 @@ class Field {
 
     public function getOnBlur() {
         return $this->onblur;
+    }
+    
+    public function setOnClick($onclick) {
+        $this->onclick = $onclick;
+    }
+
+    public function getOnClick() {
+        return $this->onclick;
     }
 
 }

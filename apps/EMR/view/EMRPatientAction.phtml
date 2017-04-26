@@ -1,10 +1,10 @@
 <div class="container">
 <div class="section text-center">
-        <h2 class="section-heading">My Upcoming Appointments</span></h2>
+        <h2 class="section-heading">My Records</span></h2>
         <hr>
 </div>
 <div id="listContain">
-<form id="listAppointments" action="#" method="post">
+<form id="EMRPatient" action="#" method="post">
     <br>
     <div class="form-group">
         <table style=width:100%;>
@@ -13,9 +13,7 @@
     $tablefield->setClass('col-lg-8');
     $tablefield->setID('myTable');
     $tablefield->setValue($mylist);
-    if($this->current_person->getRoleFK()->getRole() == 'Physician'){
     $tablefield->setNav("index.php?controller=EMR&action=EMRView&appointment_id=");
-    }
     $tablefield->ShowField();
     ?></center>
     </table>
@@ -23,7 +21,6 @@
 </form>
 </div>
 </div>
-<br><br><br>
 
 <script>
     function DoNav(the_link, new_window) {

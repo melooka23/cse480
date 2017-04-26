@@ -7,6 +7,10 @@ final class MessagesController extends BaseController {
         self::getSubController();
     }
     
+    public function inboxOpenAction() {
+        self::getSubController();
+    }
+    
 }
 
 ?>

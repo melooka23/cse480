@@ -9,12 +9,12 @@ class MessageMapper extends BaseDataMapper {
             throw new Exception('Entity is empty.');
         }
         $message_values = array(
-            'sender_fk' => $message->getPersonFK()->getID(),
-            'recipient_fk' => $message->getPersonFK()->getID(),
+            'sender_fk' => $message->getSenderFK()->getID(),
+            'recipient_fk' => $message->getRecipientFK()->getID(),
             'subject' => $message->getSubject(),
             'message' => $message->getMessage(),
-            'timestamp' => $message->getTimestamp(),
-            'read'=> $message->getRead());
+            'date_time' => $message->getDateTime(),
+            'is_read'=> $message->getIsRead());
             
         $message->setID($this->adapter->insert($this->entityTable, $message_values));
         return $message;
@@ -25,25 +25,25 @@ class MessageMapper extends BaseDataMapper {
         $db_compare_message = $this->FindBy(array('id' => $message->getID()));
         $update_fields = "";
 
-        if ($message->getPersonFK() != null)
-        if ($db_compare_message->getPersonFK()->getID() != $message->getPersonFK()->getID())
-                $update_fields['sender_fk'] = $message->getPersonFK()->getID();
+        if ($message->getSenderFK() != null)
+        if ($db_compare_message->getSenderFK()->getID() != $message->getSenderFK()->getID())
+                $update_fields['sender_fk'] = $message->getSenderFK()->getID();
         
-        if ($message->getPersonFK() != null)
-        if ($db_compare_message->getPersonFK()->getID() != $message->getPersonFK()->getID())
-                $update_fields['recipient_fk'] = $message->getPersonFK()->getID();
+        if ($message->getRecipientFK() != null)
+        if ($db_compare_message->getRecipientFK()->getID() != $message->getRecipientFK()->getID())
+                $update_fields['recipient_fk'] = $message->getRecipientFK()->getID();
 
         if ($message->getSubject() != null)
         if ($db_compare_message->getSubject() != $message->getSubject())
                 $update_fields['subject'] = $message->getSubject();
                 
-        if ($message->getTimestamp() != null)
-        if ($db_compare_message->getTimestamp() != $message->getTimestamp())
-                $update_fields['timestamp'] = $message->getTimestamp();
+        if ($message->getDateTime() != null)
+        if ($db_compare_message->getDateTime() != $message->getDateTime())
+                $update_fields['date_time'] = $message->getDateTime();
         
-        if ($message->getRead() != null)
-        if ($db_compare_message->getRead() != $message->getRead())
-                $update_fields['read'] = $message->getRead();
+        if ($message->getIsRead() != null)
+        if ($db_compare_message->getIsRead() != $message->getIsRead())
+                $update_fields['is_read'] = $message->getIsRead();
 
         if ($update_fields != "") {
             $where = "id=" . $message->getID();

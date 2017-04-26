@@ -1,7 +1,8 @@
 /* CSS used here will be applied after bootstrap.css */
 
 /* CSS used here will be applied after bootstrap.css */
-
+#open, #inboxtext {margin-left: 20px;}
+#open {background-color: #428BCA; height: 43px; padding: 10px;}
 body{ margin-top:50px;}
 .nav-tabs .glyphicon:not(.no-margin) { margin-right:10px; }
 .tab-pane .list-group-item:first-child {border-top-right-radius: 0px;border-top-left-radius: 0px;}
@@ -17,4 +18,11 @@ hr { margin-top: 5px;margin-bottom: 10px; }
 .ad { padding: 5px;background: #F5F5F5;color: #222;font-size: 80%;border: 1px solid #E5E5E5; }
 .ad a.title {color: #15C;text-decoration: none;font-weight: bold;font-size: 110%;}
 .ad a.url {color: #093;text-decoration: none;}
+.container_inbox {
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#C52D2F, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#C52D2F, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#C52D2F, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#C52D2F, white); /* Standard syntax */
+}
 

@@ -1,0 +1,7 @@
+.profileCont {
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#C52D2F, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#C52D2F, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#C52D2F, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#C52D2F, white); /* Standard syntax */
+}

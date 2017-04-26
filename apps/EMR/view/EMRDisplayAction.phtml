@@ -1,0 +1,273 @@
+<div class= "container">
+    
+    <form method= "post" role="form" id="EMRDisplay" action="#">
+    
+    <div class="section text-center">
+        <div style="border-bottom: solid; border-color: red;">
+        <h2 class="section-heading">Electronic Medical Record System</span></h2>
+        <hr>
+     </div>
+     <form class="form-inline" method='post' role="form" data-parsley-validate="" id="emr" action="#">
+     <div class="row">
+        <div class="form-group">
+            
+            <div class="table" style="border-bottom: solid; border-color: red;">
+                <table class="table">
+                <colgroup>
+                    <col span="1" width="140">
+                    <col span="1" width="200">
+                    <col span="1" width="250">
+                    <col span="6" width="160">
+               </colgroup>
+               <tr>
+             <h4><center><b>Patient Information</b></center></h4>
+             <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Patient First Name</label>
+                  <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $patient->getPersonFK()->getFirstName(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Patient Last Name</label>
+                  <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $patient->getPersonFK()->getLastName(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Date of Birth</label>
+                  <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="<?php echo $patient->getDateOfBirth(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Appointment Date</label>
+                  <input type="text" class="form-control" id="gender"  value="<?php echo $appointment_for_record->getDate(); ?>" readonly>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Appointment Time</label>
+                  <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $appointment_for_record->getAppointmentTimeFK()->getTime(); ?>" readonly>
+                </div>
+              </div>
+              </tr>
+              </table>
+            </div>
+            
+            <?php if($this->current_person->getRoleFK()->getRole() != 'Patient'){ ?>
+         <div class="table" style="border-bottom: solid; border-color: red;">
+         <h4><center><b>History of Present Illnesses</b></center></h4>
+            <table class="table">
+                <colgroup>
+                    <col span="1" width="140">
+                    <col span="1" width="200">
+                    <col span="1" width="250">
+                    <col span="50" width="160">
+               </colgroup>
+            <textarea  rows="8" cols="150" name='emr[hpi]' id='hpi' ><?php echo $existingEMR->getHpi(); ?></textarea>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Review of Symptoms</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="200">
+                    <col span="50" width="550">
+               </colgroup>
+               <textarea  rows="21" cols="150" name='emr[ros]' id='ros'><?php echo $existingEMR->getRos(); ?></textarea>
+            </table>
+            <br>
+        </div>
+        <br>
+        
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Past History</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="200">
+                    <col span="1" width="1000">
+               </colgroup>
+                   <tr>
+                       <td>Medical History: </td>
+                       <td><input type="text" class="form-control" name="emr[hx_medical]" placeholder="Insert any medical history" value="<?php echo $existingEMR->getHxMedical(); ?>" /></td>
+                   </tr>
+                   <tr>
+                       <td>Surgical History: </td>
+                       <td><input type="text" class="form-control" name="emr[hx_surgical]" placeholder="Insert any surgical history" value="<?php echo $existingEMR->getHxSurgical(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Social History: </td>
+                       <td><input type="text" class="form-control" name="emr[hx_social]" placeholder="Insert any social history" value="<?php echo $existingEMR->getHxSocial(); ?>" /></td>
+                   </tr>
+                   <tr>
+                       <td>Family History: </td>
+                       <td><input type="text" class="form-control" name="emr[hx_family]" placeholder="Insert any family history" value="<?php echo $existingEMR->getHxFamily(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Medications: </td>
+                       <td><input type="text" class="form-control" name="emr[hx_medication]" placeholder="Insert all medications" value="<?php echo $existingEMR->getHxMedication(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Allergies: </td>
+                       <td><input type="text" class="form-control" name="emr[hx_allergies]" placeholder="Insert any allergies" value="<?php echo $existingEMR->getHxAllergies(); ?>"/></td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Physical Examination</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="120">
+                    <col span="1" width="1000">
+               </colgroup>
+                   <tr>
+                       <td>General: </td>
+                       <td><input type="text" class="form-control" name="emr[pe_general]" placeholder="General Exams" value="<?php echo $existingEMR->getPeGeneral(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Skin: </td>
+                       <td><input type="text" class="form-control" name="emr[pe_skin]" placeholder="Skin Exams" value="<?php echo $existingEMR->getPeSkin(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Head: </td>
+                       <td><input type="text" class="form-control" name="emr[pe_head]" placeholder="Head Exams" value="<?php echo $existingEMR->getPeHead(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Eyes: </td>
+                       <td><input type="text" class="form-control" name="emr[pe_eyes]" placeholder="Eye Exams" value="<?php echo $existingEMR->getPeEyes(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>ENMT: </td>
+                       <td><input type="text" class="form-control" name="emr[pe_enmt]" placeholder="ENMT Exams" value="<?php echo $existingEMR->getPeEnmt(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Neck: </td>
+                       <td><input type="text" class="form-control" name="emr[pe_neck]" placeholder="Neck Exams" value="<?php echo $existingEMR->getPeNeck(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Cardiovascular:</td>
+                       <td><input type="text" class="form-control" name="emr[pe_cardiovascular]" placeholder="Cardiovascular Exams" value="<?php echo $existingEMR->getPeCardiovascular(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Abdominal:</td>
+                       <td><input type="text" class="form-control" name="emr[pe_abdominal]" placeholder="Abdominal Exams" value="<?php echo $existingEMR->getPeAbdominal(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Extremities:</td>
+                       <td><input type="text" class="form-control" name="emr[pe_extremities]" placeholder="Extremities" value="<?php echo $existingEMR->getPeExtremities(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Neurological:</td>
+                       <td><input type="text" class="form-control" name="emr[pe_neurological]" placeholder="Neurological Exams" value="<?php echo $existingEMR->getPeNeurological(); ?>"/></td>
+                   </tr>
+                   <tr>
+                       <td>Psychiatric:</td>
+                       <td><input type="text" class="form-control" name="emr[pe_psychiatric]" placeholder="Psychiatric Exams" value="<?php echo $existingEMR->getPePsychiatric(); ?>"/></td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Medical Desicion Making</b></center></h4>
+            <table>
+                <colgroup>
+                    <col span="1" width="120">
+                    <col span="1" width="1000">
+               </colgroup>
+                <tr>
+                    <td>Labs:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_labs]" placeholder="Insert any lab information" value="<?php echo $existingEMR->getMdmLabs(); ?>"/></td>
+                </tr>
+                <tr>
+                    <td>Imaging:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_imaging]" placeholder="Insert any imaging information" value="<?php echo $existingEMR->getMdmImaging(); ?>"/></td>
+                </tr>
+                <tr>
+                    <td>EKG:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_ekg]" placeholder="Insert any EKG information" value="<?php echo $existingEMR->getMdmEkg(); ?>"/></td>
+                </tr>
+                <tr>
+                    <td>COURSE/MDM:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_course]" placeholder="Insert any course/mdm information" value="<?php echo $existingEMR->getMdmCourse(); ?>"/></td>
+                </tr>
+                <tr>
+                    <td>CONSULTS:</td>
+                    <td><input type="text" class="form-control" name="emr[mdm_consults]" placeholder="Insert any consult information" value="<?php echo $existingEMR->getMdmConsults(); ?>"/></td>
+                </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        
+        <?php } ?>
+        
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Diagnosis and Disposition</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="120">
+                    <col span="1" width="1000">
+               </colgroup>
+                   <tr>
+                       <td>Diagnosis: </td>
+                       <td><input type="text" class="form-control" name="emr[diagnosis]" placeholder="Diagnosis" value="<?php echo $existingEMR->getDiagnosis(); ?>" /></td>
+                   </tr>
+                    <tr>
+                       <td>Disposition: </td>
+                       <td><input type="text" class="form-control" name="emr[disposition]" placeholder="Disposition" value="<?php echo $existingEMR->getDisposition(); ?>" /></td>
+                   </tr>
+                    <tr>
+                       <td>Discharge Instructions: </td>
+                       <td><input type="text" class="form-control" name="emr[discharge_instructions]" placeholder="Discharge Instructions" value="<?php echo $existingEMR->getDischargeInstructions(); ?>"/></td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div style="border-bottom: solid; border-color: red;">
+            <h4><center><b>Physician's Signature</b></center></h4>
+            <table>
+                 <colgroup>
+                    <col span="1" width="140">
+                    <col span="1" width="700">
+                    <col span="1" width="140">
+                    <col span="1" width="1000">
+               </colgroup>
+                   <tr>
+                       <td>Physician Signature: </td>
+                       <td><input type="text" class="form-control" name="emr[physician_signature]" placeholder="Signature Here" value="<?php echo $existingEMR->getPhysicianSignature(); ?>"/></td>
+                       <td><b><font color="red">Date:</font></b></td>
+                       <td><input type="date" class="form-control" name="emr[signed_date]" placeholder="Today's Date" value="<?php echo $existingEMR->getSignedDate(); ?>" /></td>
+                   </tr>
+            </table>
+            <br>
+        </div>
+        
+        <?php if($existingEMR->getPhysicianSignature() == null){ ?>
+        <center><input class="btn btn-primary" id="submit" type="submit" name="submitEMR" value="SUBMIT"></center><br>
+        <?php } ?>
+    </div>
+    </div>
+    </form>
+</div>
+
+<br><br><br>
+<?php if($this->current_person->getRoleFK()->getRole() == 'Patient'){ ?>
+<br><br><br><br><br><br><br><br><br>
+<?php } ?>
+
+<?php if(($existingEMR->getPhysicianSignature() != null) || ($this->current_person->getRoleFK()->getRole() == 'Patient')){ ?>
+<script>
+var form = document.getElementById("EMRDisplay");
+var elements = form.elements;
+for (var i = 0; i < elements.length; i++) {
+    elements[i].disabled = true;
+}
+</script>
+<?php } ?>

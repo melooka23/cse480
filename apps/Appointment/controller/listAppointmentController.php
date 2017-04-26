@@ -7,6 +7,9 @@ $my_upcoming_appointments = $appointment_mapper->findAll(array('patient_fk' => $
 $my_upcoming_appointments = $appointment_mapper->findAll(array('physician_fk' => $this->current_person->getID()));
 }
 
+$my_upcoming_appointments = Utils::ObjectSort($my_upcoming_appointments, 'getAppointmentTimeFK');
+$my_upcoming_appointments = Utils::ObjectSort($my_upcoming_appointments, 'getDate');
+
 $mylist = null;
 
 //create an array from the fields we actually want to see

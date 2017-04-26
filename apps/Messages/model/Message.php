@@ -5,12 +5,15 @@ final class Message extends BaseObject {
     protected $id;
     protected $subject;
     protected $message;
-    protected $read;
+    protected $is_read;
+    protected $date_time;
+    protected $sender_fk;
+    protected $recipient_fk;
     
     public function getSenderFK() {
         if (is_numeric($this->sender_fk)) {
-            $MessageMapper = new MessageMapper();
-            $this->sender_fk = $MessageMapper->FindBy(array('id' => $this->sender_fk));
+            $personMapper = new PersonMapper();
+            $this->sender_fk = $personMapper->FindBy(array('id' => $this->sender_fk));
         } elseif (empty($this->sender_fk))
             $this->sender_fk = new Person();
         return $this->sender_fk;
@@ -22,8 +25,8 @@ final class Message extends BaseObject {
     
         public function getRecipientFK() {
         if (is_numeric($this->recipient_fk)) {
-            $MessageMapper = new MessageMapper();
-            $this->recipient_fk = $MessageMapper->FindBy(array('id' => $this->recipient_fk));
+            $personMapper = new PersonMapper();
+            $this->recipient_fk = $personMapper->FindBy(array('id' => $this->recipient_fk));
         } elseif (empty($this->recipient_fk))
             $this->recipient_fk = new Person();
         return $this->recipient_fk;
@@ -50,21 +53,21 @@ final class Message extends BaseObject {
         return $this->message;
     }
     
-    public function setTimeStamp($timestamp) {
-        $this->timestamp = $timestamp;
+    public function setDateTime($date_time) {
+        $this->date_time = $date_time;
     }
     
-    public function getTimeStamp(){
-        return $this->timestamp;
+    public function getDateTime(){
+        return $this->date_time;
     }
 
 
-  public function setRead($read) {
-        $this->read = $read;
+  public function setIsRead($is_read) {
+        $this->is_read = $is_read;
     }
     
-    public function getRead(){
-        return $this->read;
+    public function getIsRead(){
+        return $this->is_read;
     }
 
 }

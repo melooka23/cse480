@@ -9,6 +9,7 @@
         ?>
         <!-- CSS -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         
         <?php if($this->action == "registerPerson") { ?>
@@ -23,9 +24,20 @@
         <?php if ($this->action == 'inboxView') { ?>
         <link href="public/css/inbox.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
         <?php } ?>
-         <?php if ($this->action == 'listAction') { ?>
-        <link href="public/css/home.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
+         <?php if (($this->action == 'list') && ($this->controller == 'Main')) { ?>
+        <link href="public/css/style.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
         <?php } ?>
+        <?php if (($this->action == 'EMRView') || ($this->action == 'EMRDisplay')) { ?>
+        <link href="public/css/emr.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
+        <?php } ?>
+        <?php if ($this->action == 'createAppointments') { ?>
+        <link href="public/css/createAppt.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
+        <?php } ?>
+        <?php if ($this->action == 'listAppointment') { ?>
+        <link href="public/css/listAppt.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
+        <?php } ?>
+        
+    
     <link href="public/css/bootstrap.min.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
     <link href="public/css/font-awesome.min.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
     <link href="public/css/animate.min.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" rel="stylesheet">
@@ -74,7 +86,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php"><img src="public/images/navlogofin.png" alt="logo"></a>
+                    <a class="navbar-brand" href="index.php"><img src="public/images/LogoFinal.png" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
@@ -89,13 +101,15 @@
                                     <li><a href="<?php echo Utils::createLink('Appointment', 'scheduleAppointment'); ?>">Schedule Appointment</a></li>
                                     <li><a href="<?php echo Utils::createLink('Appointment', 'listAppointment'); ?>">View Appointments</a></li>
                                 <?php } else{ ?>
-                                    <li><a href="<?php echo Utils::createLink('Appointment', 'createAppointments'); ?>">Create Appointments</a></li>
+                                    <li><a href="<?php echo Utils::createLink('Appointment', 'createAppointments'); ?>">Appointments Availability</a></li>
                                     <li><a href="<?php echo Utils::createLink('Appointment', 'listAppointment'); ?>">View Appointments</a></li>
                                 <?php } ?>
                             </ul>
                         </li>
                         <?php if($this->current_person->getRoleFK()->getRole() != "Patient"){ ?>
-                        <li <?php if(($this->action == 'EMRView') && ($this->controller == 'EMR')) echo 'class="active"' ?>><a href="<?php echo Utils::createLink('EMR', 'EMRView'); ?>">EMR</a></li>
+                        <li <?php if($this->controller == 'EMR') echo 'class="active"' ?>><a href="<?php echo Utils::createLink('EMR', 'EMRPatientSearch'); ?>">EMR</a></li>
+                        <?php } else { ?>
+                        <li <?php if($this->controller == 'EMR') echo 'class="active"' ?>><a href="<?php echo Utils::createLink('EMR', 'EMRPatient'); ?>">EMR</a></li>
                         <?php } ?>
                         <li><a href="<?php echo Utils::createLink('Person', 'logoutPerson'); ?>">Log Out</a></li>
                     </ul>
